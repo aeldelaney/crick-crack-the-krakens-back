@@ -40,7 +40,7 @@ further they go, such as more batteries and key information that will help them 
 ## Gameplay
 - arrow keys or wasd for movement
 - point and click to interact with objects/inventory
-- ray pointing for flashing
-- animations for key insertion into a door etc
-- reset upon death -- last time on base
+- ray pointing for flashlight
+- animations for key insertion into a door, interacting with keypads, etc
+- reset upon death -- last time player manually saved on base
 
