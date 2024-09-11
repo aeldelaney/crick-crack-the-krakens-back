@@ -16,31 +16,31 @@ further they go, such as more batteries and key information that will help them 
 
 
 ## Genre
-escape/puzzle
-first-person
-thriller/horror
+- escape/puzzle
+- first-person
+- thriller/horror
 
 ## Inspiration
-The Amnesia game series
-Five Nights at Fredies
-colorbomb TRACE
-https://opengameart.org/content/submarine-game-music
-https://www.soundsnap.com/tags/submarine
-https://pixabay.com/sound-effects/waterdrops-cave-echo-sounds-230896/
-https://pixabay.com/sound-effects/a-fake-friends-laugh-tmc-190095/
-https://pixabay.com/sound-effects/strange-echoing-noises-230895/
-https://pixabay.com/sound-effects/whisper-trail-2ogg-14429/
-https://pixabay.com/sound-effects/echo-dungeon-70538/
-https://pixabay.com/sound-effects/droplets-in-a-cave-6785/
-https://pixabay.com/sound-effects/echo-26189/
-https://samplefocus.com/samples/echo-water-drop-one-shot-fx
-https://opengameart.org/content/submarine-game-music
-https://www.soundsnap.com/tags/submarine
+- The Amnesia game series
+- Five Nights at Fredies
+- colorbomb TRACE
+- https://opengameart.org/content/submarine-game-music
+- https://www.soundsnap.com/tags/submarine
+- https://pixabay.com/sound-effects/waterdrops-cave-echo-sounds-230896/
+- https://pixabay.com/sound-effects/a-fake-friends-laugh-tmc-190095/
+- https://pixabay.com/sound-effects/strange-echoing-noises-230895/
+- https://pixabay.com/sound-effects/whisper-trail-2ogg-14429/
+- https://pixabay.com/sound-effects/echo-dungeon-70538/
+- https://pixabay.com/sound-effects/droplets-in-a-cave-6785/
+- https://pixabay.com/sound-effects/echo-26189/
+- https://samplefocus.com/samples/echo-water-drop-one-shot-fx
+- https://opengameart.org/content/submarine-game-music
+- https://www.soundsnap.com/tags/submarine
 
 ## Gameplay
-arrow keys or wasd for movement
-point and click to interact with objects/inventory
-ray pointing for flashing
-animations for key insertion into a door etc
-reset upon death -- last time on base
+- arrow keys or wasd for movement
+- point and click to interact with objects/inventory
+- ray pointing for flashing
+- animations for key insertion into a door etc
+- reset upon death -- last time on base
 
