@@ -31,11 +31,11 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private Node playerNode;
     private BetterCharacterControl playerControl;
     private CameraNode camNode;
-    private Vector3f walkDirection = new Vector3f(0,0,0);
-    private Vector3f viewDirection = new Vector3f(0,0,1);
+    private final Vector3f walkDirection = new Vector3f(0,0,0);
+    private final Vector3f viewDirection = new Vector3f(0,0,1);
     private boolean rotateLeft = false, rotateRight = false,
     forward = false, backward = false;
-    private float speed=8;
+    private final float speed=8;
     
     public static void main(String[] args) {
         Project_Base app = new Project_Base();
