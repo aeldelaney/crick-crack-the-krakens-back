@@ -10,17 +10,14 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
-import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.CameraNode;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.CameraControl;
-import com.jme3.scene.shape.Box;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -85,7 +82,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         rootNode.attachChild(playerNode);
         
         playerControl = new BetterCharacterControl(1.5f, 4, 30f);
-        playerControl.setJumpForce(new Vector3f(0, 300, 0));
+        playerControl.setJumpForce(new Vector3f(0, 200, 0));
         playerControl.setGravity(new Vector3f(0, -10, 0));
         playerNode.addControl(playerControl);
         bulletAppState.getPhysicsSpace().add(playerControl);
