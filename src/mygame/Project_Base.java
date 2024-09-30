@@ -10,14 +10,17 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.CameraNode;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.CameraControl;
+import com.jme3.scene.shape.Box;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -26,6 +29,7 @@ import com.jme3.scene.control.CameraControl;
  */
 public class Project_Base extends SimpleApplication implements ActionListener {
     private Node sceneNode;
+    private Node interactiveNode;
     private BulletAppState bulletAppState;
     private RigidBodyControl scenePhy;
     private Node playerNode;
@@ -61,9 +65,8 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);
         
-//        assetManager.registerLocator("town.zip", ZipLocator.class);
+        // Model
         sceneNode = (Node)assetManager.loadModel("Scenes/Underwater_Base.j3o");
-//        sceneNode = (Node)assetManager.loadModel("main.scene");
         sceneNode.scale(1.5f);
         scenePhy = new RigidBodyControl(0f);
         sceneNode.addControl(scenePhy);
@@ -71,6 +74,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
 
         rootNode.attachChild(sceneNode);
         
+        // Light
         AmbientLight ambient = new AmbientLight();
         rootNode.addLight(ambient);
         DirectionalLight sun = new DirectionalLight();
@@ -78,6 +82,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         rootNode.addLight(sun);
         viewPort.setBackgroundColor(ColorRGBA.Cyan);
         
+        // Player
         playerNode = new Node("the player");
         playerNode.setLocalTranslation(new Vector3f(7, 0, -2));
         rootNode.attachChild(playerNode);
@@ -87,6 +92,20 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         playerControl.setGravity(new Vector3f(0, -10, 0));
         playerNode.addControl(playerControl);
         bulletAppState.getPhysicsSpace().add(playerControl);
+    
+        // Item
+        
+        Box b = new Box(0.25f, 0.25f, 0.25f);
+        Geometry geom = new Geometry("item", b);
+
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", ColorRGBA.White);
+        geom.setMaterial(mat);
+        geom.setLocalTranslation(new Vector3f(1, 2, -5));
+        
+        interactiveNode = (Node)sceneNode.getChild("interactive objects");
+
+        interactiveNode.attachChild(geom);
     }
    
 
