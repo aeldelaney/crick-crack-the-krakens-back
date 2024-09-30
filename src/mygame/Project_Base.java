@@ -5,6 +5,7 @@ import com.jme3.asset.plugins.ZipLocator;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.BetterCharacterControl;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.collision.CollisionResults;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
@@ -23,6 +24,7 @@ import com.jme3.scene.control.CameraControl;
 import com.jme3.scene.shape.Box;
 import com.jme3.input.controls.*;
 import com.jme3.input.*;
+import com.jme3.math.Ray;
 
 
 /**
@@ -41,12 +43,20 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private final Vector3f walkDirection = new Vector3f(0,0,0);
     private final Vector3f viewDirection = new Vector3f(0,0,1);
     private boolean rotateLeft = false, rotateRight = false,
+    rotateUp = false, rotateDown = false,
     forward = false, backward = false;
     private final float speed=8;
     
     private final static String MAPPING_PICKUP  = "Pickup Item";
     private final static String MAPPING_ROTATE = "Rotate";
+    private boolean rotate = true;
+    private final static String MAPPING_ROTATE_RIGHT  = "Rotate Right";
+    private final static String MAPPING_ROTATE_LEFT = "Rotate Left";
+    private final static String MAPPING_ROTATE_UP = "Rotate Up";
+    private final static String MAPPING_ROTATE_DOWN = "Rotate Down";
     private Geometry item1;
+    
+    private static Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
     
     private final static Trigger TRIGGER_PICKUP =
         new MouseButtonTrigger(MouseInput.BUTTON_LEFT);
@@ -55,10 +65,30 @@ public class Project_Base extends SimpleApplication implements ActionListener {
      private final static Trigger TRIGGER_ROTATE =
 //           new KeyTrigger(KeyInput.KEY_LSHIFT);
         new MouseButtonTrigger(MouseInput.BUTTON_RIGHT);
-    
+     
     public static void main(String[] args) {
         Project_Base app = new Project_Base();
         app.start();
+    }
+    
+    public Geometry myBox(String name, Vector3f loc, ColorRGBA color)
+    {
+        Geometry geom = new Geometry(name, mesh);
+        Material mat = new Material(assetManager,
+            "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", color);
+        geom.setMaterial(mat);
+        geom.setLocalTranslation(loc);
+        return geom;
+}
+    
+    private void attachCenterMark() {
+           Geometry c = myBox("center mark",
+             Vector3f.ZERO, ColorRGBA.Red);
+           c.scale(4);
+           c.setLocalTranslation( settings.getWidth()/2,
+             settings.getHeight()/2, 0 );
+           guiNode.attachChild(c); // attach to 2D user interface
     }
 
     @Override
@@ -109,7 +139,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         bulletAppState.getPhysicsSpace().add(playerControl);
     
         // Item
-        Box b = new Box(0.25f, 0.25f, 0.25f);
+        Box b = new Box(0.25f, 0.75f, 0.25f);
         item1 = new Geometry("item", b);
 
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -126,21 +156,28 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         
         inputManager.addListener(analogListener, new String[]{MAPPING_ROTATE});
         inputManager.addListener(analogListener, new String[]{MAPPING_PICKUP});
+  
+        // center mark
+        attachCenterMark();
     }
    
 
     @Override
     public void simpleUpdate(float tpf) {
         camNode = new CameraNode("CamNode", cam);
+        // Set the direction to SpatialToCamera, which means the camera will copy the movements of the Node
         camNode.setControlDir(CameraControl.
         ControlDirection.SpatialToCamera);
         camNode.setLocalTranslation(new Vector3f(0, 4, -6));
         Quaternion quat = new Quaternion();
         quat.lookAt(Vector3f.UNIT_Z, Vector3f.UNIT_Y);
         camNode.setLocalRotation(quat);
+        //attaching the camNode to the playerNode
         playerNode.attachChild(camNode);
         camNode.setEnabled(true);
+        //disable the default 1st-person flyCam
         flyCam.setEnabled(false);
+        inputManager.setCursorVisible(true);
         // Get current forward and left vectors of the playerNode:
         Vector3f modelForwardDir =
         playerNode.getWorldRotation().mult(Vector3f.UNIT_Z);
@@ -176,8 +213,12 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     @Override
     public void onAction(String binding, boolean isPressed, float tpf) {
         switch (binding) {
-            case "Rotate Left" -> rotateLeft = isPressed;
-            case "Rotate Right" -> rotateRight = isPressed;
+            case "Rotate Left" -> {
+                rotateLeft = isPressed;
+            }
+            case "Rotate Right" -> {
+                rotateRight = isPressed;
+            }
             case "Forward" -> forward = isPressed;
             case "Back" -> backward = isPressed;
             case "Jump" -> playerControl.jump();
@@ -189,12 +230,22 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private AnalogListener analogListener = new AnalogListener() {
         @Override
         public void onAnalog(String name, float intensity, float tpf) {
-            if (name.equals(MAPPING_PICKUP)) {
-               item1.removeFromParent();
+            CollisionResults results = new CollisionResults();
+            Ray ray = new Ray(cam.getLocation(), cam.getDirection());
+            interactiveNode.collideWith(ray, results);
+            if (results.size() > 0) {
+                Geometry target = results.getClosestCollision().getGeometry();
+                if (name.equals(MAPPING_PICKUP)) {
+                    target.removeFromParent();
+                }
+                if (name.equals(MAPPING_ROTATE)) {
+                    target.rotate(0, intensity, 0); // rotate around Y axis
+                }
+            } else {
+                System.out.println("Selection: Nothing" );
             }
-            if (name.equals(MAPPING_ROTATE)) {
-               item1.rotate(0, intensity, 0); // rotate around Y axis
-            }
+ 
+                      
         };
     };
     
