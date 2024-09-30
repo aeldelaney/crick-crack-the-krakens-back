@@ -61,8 +61,9 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);
         
-        assetManager.registerLocator("town.zip", ZipLocator.class);
-        sceneNode = (Node)assetManager.loadModel("main.scene");
+//        assetManager.registerLocator("town.zip", ZipLocator.class);
+        sceneNode = (Node)assetManager.loadModel("Scenes/Underwater_Base.j3o");
+//        sceneNode = (Node)assetManager.loadModel("main.scene");
         sceneNode.scale(1.5f);
         scenePhy = new RigidBodyControl(0f);
         sceneNode.addControl(scenePhy);
@@ -78,7 +79,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         viewPort.setBackgroundColor(ColorRGBA.Cyan);
         
         playerNode = new Node("the player");
-        playerNode.setLocalTranslation(new Vector3f(0, 6, 0));
+        playerNode.setLocalTranslation(new Vector3f(7, 0, -2));
         rootNode.attachChild(playerNode);
         
         playerControl = new BetterCharacterControl(1.5f, 4, 30f);
