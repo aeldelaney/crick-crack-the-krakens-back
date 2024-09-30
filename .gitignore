@@ -25,3 +25,4 @@ nbdist/
 # added
 /.DS_Store
 /src/.DS_Store
+/hs_err*
