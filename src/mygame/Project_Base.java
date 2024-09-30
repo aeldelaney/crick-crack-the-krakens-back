@@ -21,6 +21,9 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.CameraControl;
 import com.jme3.scene.shape.Box;
+import com.jme3.input.controls.*;
+import com.jme3.input.*;
+
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -40,6 +43,18 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private boolean rotateLeft = false, rotateRight = false,
     forward = false, backward = false;
     private final float speed=8;
+    
+    private final static String MAPPING_PICKUP  = "Pickup Item";
+    private final static String MAPPING_ROTATE = "Rotate";
+    private Geometry item1;
+    
+    private final static Trigger TRIGGER_PICKUP =
+        new MouseButtonTrigger(MouseInput.BUTTON_LEFT);
+//            
+    
+     private final static Trigger TRIGGER_ROTATE =
+//           new KeyTrigger(KeyInput.KEY_LSHIFT);
+        new MouseButtonTrigger(MouseInput.BUTTON_RIGHT);
     
     public static void main(String[] args) {
         Project_Base app = new Project_Base();
@@ -94,18 +109,23 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         bulletAppState.getPhysicsSpace().add(playerControl);
     
         // Item
-        
         Box b = new Box(0.25f, 0.25f, 0.25f);
-        Geometry geom = new Geometry("item", b);
+        item1 = new Geometry("item", b);
 
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.White);
-        geom.setMaterial(mat);
-        geom.setLocalTranslation(new Vector3f(1, 2, -5));
-        
+        item1.setMaterial(mat);
+        item1.setLocalTranslation(new Vector3f(1, 2, -5));
+                
         interactiveNode = (Node)sceneNode.getChild("interactive objects");
-
-        interactiveNode.attachChild(geom);
+        interactiveNode.attachChild(item1);
+        
+        // Mappings
+        inputManager.addMapping(MAPPING_PICKUP, TRIGGER_PICKUP);
+        inputManager.addMapping(MAPPING_ROTATE, TRIGGER_ROTATE);
+        
+        inputManager.addListener(analogListener, new String[]{MAPPING_ROTATE});
+        inputManager.addListener(analogListener, new String[]{MAPPING_PICKUP});
     }
    
 
@@ -147,7 +167,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         }
         playerControl.setViewDirection(viewDirection); // turn!
     }
-    
+      
     @Override
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
@@ -165,4 +185,18 @@ public class Project_Base extends SimpleApplication implements ActionListener {
             }
         }
     }
+    
+    private AnalogListener analogListener = new AnalogListener() {
+        @Override
+        public void onAnalog(String name, float intensity, float tpf) {
+            if (name.equals(MAPPING_PICKUP)) {
+               item1.removeFromParent();
+            }
+            if (name.equals(MAPPING_ROTATE)) {
+               item1.rotate(0, intensity, 0); // rotate around Y axis
+            }
+        };
+    };
+    
+
 }
