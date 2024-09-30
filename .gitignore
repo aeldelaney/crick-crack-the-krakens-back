@@ -10,6 +10,7 @@ dist/
 nbdist/
 .nb-gradle/
 
+
 # Pulled from a gradle template
 /.gradle/
 /.idea/
@@ -20,3 +21,7 @@ nbdist/
 /*.dll
 /*.dylib
 /*.so
+
+# added
+/.DS_Store
+/src/.DS_Store
