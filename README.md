@@ -124,7 +124,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
   
 - We handle user input such as pressing the 'wasd' keys to move or the spacebar to jump. The user can also left click on their mouse once approaching and looking at an interactive object (in this case, the block) in order to "pick it up", where it will disappear from the scene. The listener on the keys and object allows for these elements to work coherently.
 
-![image](https://github.com/user-attachments/assets/73a966d5-2a63-4919-8666-368d90ff48b1)
+  ![image](https://github.com/user-attachments/assets/73a966d5-2a63-4919-8666-368d90ff48b1)
 
 - Abstract? idk
 
