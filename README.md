@@ -14,7 +14,6 @@ a respawn at the last save at the base. The player hears a specific sound when t
 If the player runs out of battery, they will have to get back to base in order to recharge. The player will also be able to find items in the submarine the 
 further they go, such as more batteries and key information that will help them progress further and learn more about the way to escape.
 
-Consider changing setting from sub to underwater base if rooms/spaces get too "cluttered"/linear.
 
 ## Genre
 - escape/puzzle
@@ -81,13 +80,40 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 
 
 ## Gameplay
-- arrow keys or wasd for movement
-- point and click to interact with objects/inventory
-- ray pointing for flashlight
-- animations for key insertion into a door, interacting with keypads, etc
-- reset upon death -- last time player manually saved on base
+### Mechanics
+- The game is set in an underwater base. They player starts out in a room that has no windows. This acts as their home base for the game since it is safe to use lights without alerting the Kraken
+  - Here the player can manually save their progress
+- The player can move using the wasd or arrow keys for movement
+  - Moving around quickly generates noise
+- The player can point and click to interact with objects
+  - The mouse icon will change to indicate that an object is interactable
+  - The player cannot just pick up items by walking over them
+  - For puzzles, we intend to have animations for things like key insertion into a door, typing on keypads, etc.
+  - Some interactable objects create noise
+- The player has a flashlight at the start that they can use to illuminate the base
+  - The player will use the i key to turn on/off the flashlight
+- If the player dies, they reset to their last save
 
-- Gameplay section is too bare: Include more discussion (include or move elements that are currently in the game summary that better apply to game play.)
+### Objective
+- The player is trying to escape the base. They wake up and do not know what has happened to the base or to their crew. Moreover, the setting is omnious, so they just want to get out.
+- To do this, the player has to solve puzzles to learn about the base and find their way to an escape pod
+- While trying to escape, the player has to avoid 2 enemies
+  1. Primary: the Kraken
+    - The Kraken is colossal squid lurking about outside the base
+    - It is attracted to light sources since there is little light in the depths of the ocean
+    - At random intervals, the Kraken swims by and the player has to be careful to keep the lights off so as not to provoke it
+    - If the player has their light on near a window for more than [NUMBER OF SECONDS] seconds (idk maybe add some proximity factor as well), the Kraken is attracted back to the underwater base
+    - When the Kraken is aggravated, it latches onto the base and makes it shake for [NUMBER OF SECONDS] seconds. This makes the base lose [PERCENTAGE]% structural integrity. During this time, the player must remain quiet and have no lights on for it to go away. If the player fails, the Kraken destroys the base
+  3. Secondary: the creature
+    - The creature is some unknwon entity either created by the people on the base or discovered and experimented on -- who knows. Either way, it's been set loose.
+    - The creature is attracted by sound. If the player is over the sound threshold for more than [NUMBER OF SECONDS] seconds, then it is attracted
+    - When the creature is close, it can hear sound from any movement the player makes unless they are holding their breath
+    - The creature is moves slower than the player, so to get away, the player must run far enough away such that their normal movements no longer alert the creature of their presence
 
-- Come up with a three puzzles the player will need to solve. Can then add more later if time permits.
+### Main Puzzles
+1. Find some document that tells you where x tool is
+2. See some code somewhere that let's you unlock keypad
+3. idk
+4. (additional if make secondary enemy) Find a noise maker somehow to distract the indoor creature so they can open the door to leave (opening the door makes too much noise for too long to escape otherwise)
+
 
