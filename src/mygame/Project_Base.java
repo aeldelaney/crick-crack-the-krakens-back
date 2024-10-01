@@ -26,6 +26,9 @@ import com.jme3.input.controls.*;
 import com.jme3.input.*;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
+import com.jme3.renderer.Camera;
+import com.jme3.renderer.ViewPort;
+import com.jme3.scene.control.AbstractControl;
 
 
 /**
@@ -55,9 +58,13 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private final static String MAPPING_ROTATE_LEFT = "Rotate Left";
     private final static String MAPPING_ROTATE_UP = "Rotate Up";
     private final static String MAPPING_ROTATE_DOWN = "Rotate Down";
-    private Geometry item1;
     
-    private static Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
+    private Geometry item1;
+    private Geometry aggroCube;
+    
+    private static Box mesh = new Box(0.25f, 0.25f, 0.25f);
+    
+    private Ray chaseRay = new Ray();
     
     private final static Trigger TRIGGER_PICKUP =
         new MouseButtonTrigger(MouseInput.BUTTON_LEFT);
@@ -132,16 +139,14 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         bulletAppState.getPhysicsSpace().add(playerControl);
     
         // Item
-        Box b = new Box(0.25f, 0.25f, 0.25f);
-        item1 = new Geometry("item", b);
+        item1 = myBox("item1", new Vector3f(1, 2, -5), ColorRGBA.White);
 
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", ColorRGBA.White);
-        item1.setMaterial(mat);
-        item1.setLocalTranslation(new Vector3f(1, 2, -5));
-                
         interactiveNode = (Node)sceneNode.getChild("interactive objects");
         interactiveNode.attachChild(item1);
+        
+        // Aggro Cube
+        aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
+        rootNode.attachChild(aggroCube);
         
         // Mappings
         inputManager.addMapping(MAPPING_PICKUP, TRIGGER_PICKUP);
@@ -194,6 +199,16 @@ public class Project_Base extends SimpleApplication implements ActionListener {
             rotateR.multLocal(viewDirection);
         }
         playerControl.setViewDirection(viewDirection); // turn!
+        
+        if (cam.getLocation().distance(aggroCube.getLocalTranslation())
+       < 12) {
+           Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
+           Vector3f directionToCam = camDown.subtract(aggroCube.getLocalTranslation()).normalize();
+//           aggroCube.move(directionToCamera);
+             aggroCube.setLocalTranslation(aggroCube.getLocalTranslation().addLocal(directionToCam.mult(0.08f)));
+         }
+        
+        
     }
       
     @Override
@@ -259,5 +274,39 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         };
     };
     
+    public class CubeChaserControl extends AbstractControl {
+        private Ray ray = new Ray();
+        private final Camera cam;
+        private final Node rootNode;
+        
+        @Override
+        protected void controlUpdate(float tpf) {
+            CollisionResults results = new CollisionResults();
+            ray.setOrigin(cam.getLocation());
+            ray.setDirection(cam.getDirection());
+            rootNode.collideWith(ray, results);
+            if (results.size() > 0) {
+                Geometry target = results.getClosestCollision().
+                getGeometry();
+                // interact with target
+                if (target.equals(spatial)) {
+                if (cam.getLocation().distance(spatial.getLocalTranslation()) <
+                10) {
+                    spatial.move(cam.getDirection());
+                    }
+                }
+            }
+        }
+        protected void controlRender(RenderManager rm, ViewPort vp) {
+        }
+           
+        public CubeChaserControl(Camera cam, Node rootNode) {
+           this.cam = cam;
+           this.rootNode = rootNode;
+        }
 
+           
+        
+    }
 }
+    
