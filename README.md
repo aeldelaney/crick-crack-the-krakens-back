@@ -87,7 +87,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
   - Turning the flashlight on and off creates noise
   - The flashlight has a rechargeable battery that runs out, so the player must return to base periodically to recharge
 - There is a sound meter to display how loud the player is being relative to the envrionment
-- There is a base status to display how structurally sound the udnerwater base is
+- There is a base status to display how structurally sound the underwater base is
 - If the player dies, they reset to their last save
 
 ### Objective
@@ -112,7 +112,17 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 ### Main Puzzles
 1. Find some document that tells you where x tool is
 2. See some code somewhere that let's you unlock keypad
-3. idk
-4. (additional if make secondary enemy) Find a noise maker somehow to distract the indoor creature so they can open the door to leave (opening the door makes too much noise for too long to escape otherwise)
+3. Fix a light to unlock area/object but player has to be careful in order to not alert the Kraken
+4. (additional if making a secondary enemy) Find a noise maker somehow to distract the indoor creature so they can open the door to leave (opening the door makes too much noise for too long to escape otherwise)
+
+
+## Development
+### First Deliverable
+- We added a scene graph to place a laboratory room with objects (boxes, wires, tables, chairs, etc.) and attached it to the scene node. We also created an interactable node to which we add interactable objects so that they can be identified in a more efficient manner. We added a geometric cube as our interactable object.
+  ![image](https://github.com/user-attachments/assets/0e279b96-bb0d-418d-9548-897091d21f82)
+- We handle user input such as pressing the 'wasd' keys to move or the spacebar to jump. The user can also left click on their mouse once approaching and looking at an interactive object (in this case, the block) in order to "pick it up", where it will disappear from the scene. The listener on the keys and object allows for these elements to work coherently.
+![image](https://github.com/user-attachments/assets/73a966d5-2a63-4919-8666-368d90ff48b1)
+- Abstract? idk
+
 
 
