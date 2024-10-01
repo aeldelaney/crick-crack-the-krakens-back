@@ -3,16 +3,7 @@
 [game design document](https://en.wikipedia.org/wiki/Game_design_document)
 
 ## Game Summary
-This game will focus on an amensiac player being stuck inside an abandoned submarine. The base that the player starts at has some lighting and charging ports so 
-that the player is able to recharge their partially broken flashlight. The player then enters the rest of the submarine and tries to explore it to find clues
-about what happened to the submarine and why the player was here. While exploring, if the player keeps the light on for too long in areas with windows,
-it will attract the attention of the deepsea predators (Kraken) and the submarine will begin to shake/crack, causing the player to die if they don't turn off their
-light for some time (and they would have to start at their last saved base position). If the player turns off their light, a creeping entity inside the
-submarine will attempt to capture the player. The entity moves faster than the player, and it detects the play via sound which is also something to consider
-when turning the flashlight on and off since the entity will be able to detect it. The player getting caught by the entity will result in a game over and
-a respawn at the last save at the base. The player hears a specific sound when the entity moves and the sounds become clearer when the entity is closer.
-If the player runs out of battery, they will have to get back to base in order to recharge. The player will also be able to find items in the submarine the 
-further they go, such as more batteries and key information that will help them progress further and learn more about the way to escape.
+This is an thriller escape game set in the depths of the ocean. The player awakens stranded on an underwater base without memory of what happened or why they're there. All they know is that they have to escape. To do so, the player must explore the base to learn how to leave and find the items needed to do so. However, there's more the player has to contend with. As the player moves about, they realize that they're not alone. A Kraken lurks outside the base, ready to attack at the wrong move, and some unknown entity lies in wait for the player inside the underwater base itself. Will you be able to escape?
 
 
 ## Genre
@@ -83,15 +74,20 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 ### Mechanics
 - The game is set in an underwater base. They player starts out in a room that has no windows. This acts as their home base for the game since it is safe to use lights without alerting the Kraken
   - Here the player can manually save their progress
-- The player can move using the wasd or arrow keys for movement
+- The player can move using the `wasd` or `arrow keys` for movement
   - Moving around quickly generates noise
+- The player can hold their breath for [NUMBER OF SECONDS] seconds at a time using the `b` key
 - The player can point and click to interact with objects
   - The mouse icon will change to indicate that an object is interactable
   - The player cannot just pick up items by walking over them
   - For puzzles, we intend to have animations for things like key insertion into a door, typing on keypads, etc.
   - Some interactable objects create noise
 - The player has a flashlight at the start that they can use to illuminate the base
-  - The player will use the i key to turn on/off the flashlight
+  - The player will use the `i` key to turn on/off the flashlight
+  - Turning the flashlight on and off creates noise
+  - The flashlight has a rechargeable battery that runs out, so the player must return to base periodically to recharge
+- There is a sound meter to display how loud the player is being relative to the envrionment
+- There is a base status to display how structurally sound the udnerwater base is
 - If the player dies, they reset to their last save
 
 ### Objective
@@ -102,13 +98,16 @@ One particular aspect we like about this game are the quick time events (QTEs). 
     - The Kraken is colossal squid lurking about outside the base
     - It is attracted to light sources since there is little light in the depths of the ocean
     - At random intervals, the Kraken swims by and the player has to be careful to keep the lights off so as not to provoke it
+      - When the Kraken is near the base, all other creatures swimming around outside go away and stop making sounds
     - If the player has their light on near a window for more than [NUMBER OF SECONDS] seconds (idk maybe add some proximity factor as well), the Kraken is attracted back to the underwater base
     - When the Kraken is aggravated, it latches onto the base and makes it shake for [NUMBER OF SECONDS] seconds. This makes the base lose [PERCENTAGE]% structural integrity. During this time, the player must remain quiet and have no lights on for it to go away. If the player fails, the Kraken destroys the base
+    - Once the base reaches 0%, it collapses and the player dies
   3. Secondary: the creature
-    - The creature is some unknwon entity either created by the people on the base or discovered and experimented on -- who knows. Either way, it's been set loose.
+    - The creature is some unknown entity either created by the people on the base or discovered and experimented on -- who knows. Either way, it's been set loose.
+    - It lurks around the base, moving slowly from area to area. If the creature is getting close to the player, they begin to notice signs of its presence: sounds, increasing anxiety levels
     - The creature is attracted by sound. If the player is over the sound threshold for more than [NUMBER OF SECONDS] seconds, then it is attracted
-    - When the creature is close, it can hear sound from any movement the player makes unless they are holding their breath
-    - The creature is moves slower than the player, so to get away, the player must run far enough away such that their normal movements no longer alert the creature of their presence
+    - When the creature is close, it can hear sound from any kind movement the player makes -- unless the player is holding their breath
+    - The creature moves slower than the player, so to get away, the player must run far enough away such that their normal movements no longer alert the creature of their presence
 
 ### Main Puzzles
 1. Find some document that tells you where x tool is
