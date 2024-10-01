@@ -25,6 +25,7 @@ import com.jme3.scene.shape.Box;
 import com.jme3.input.controls.*;
 import com.jme3.input.*;
 import com.jme3.math.Ray;
+import com.jme3.math.Vector2f;
 
 
 /**
@@ -81,15 +82,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         geom.setLocalTranslation(loc);
         return geom;
 }
-    
-    private void attachCenterMark() {
-           Geometry c = myBox("center mark",
-             Vector3f.ZERO, ColorRGBA.Red);
-           c.scale(4);
-           c.setLocalTranslation( settings.getWidth()/2,
-             settings.getHeight()/2, 0 );
-           guiNode.attachChild(c); // attach to 2D user interface
-    }
+
 
     @Override
     public void simpleInitApp() {
@@ -139,7 +132,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         bulletAppState.getPhysicsSpace().add(playerControl);
     
         // Item
-        Box b = new Box(0.25f, 0.75f, 0.25f);
+        Box b = new Box(0.25f, 0.25f, 0.25f);
         item1 = new Geometry("item", b);
 
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -157,8 +150,6 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         inputManager.addListener(analogListener, new String[]{MAPPING_ROTATE});
         inputManager.addListener(analogListener, new String[]{MAPPING_PICKUP});
   
-        // center mark
-        attachCenterMark();
     }
    
 
@@ -231,8 +222,27 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         @Override
         public void onAnalog(String name, float intensity, float tpf) {
             CollisionResults results = new CollisionResults();
-            Ray ray = new Ray(cam.getLocation(), cam.getDirection());
+            // get the 2D coordinates of the cursor position from the
+            //  inputManager object
+            Vector2f click2d = inputManager.getCursorPosition();
+            // convert these (x,y) coordinates into (x,y,z) coordinates with a
+            //  depth (z) of zero
+            Vector3f click3d = cam.getWorldCoordinates(
+                new Vector2f(click2d.getX(), click2d.getY()), 0f);
+            // Cast the ray forward from this point
+            // Calculate the direction vector of a temporary point that is
+            //   1 WU deep into the screen from the clicked location:
+            Vector3f dir = cam.getWorldCoordinates(
+                new Vector2f(click2d.getX(), click2d.getY()), 1f).
+                subtractLocal(click3d);
+            // aim the ray starting from the click location into the calculated forward direction
+            Ray ray = new Ray(click3d, dir);
+            // calculate intersections between this line-of-sight ray and all
+            //  geometries attached to the interactiveNode object, and collect
+            //  them in the results list
             interactiveNode.collideWith(ray, results);
+            
+            // If the user has clicked anything
             if (results.size() > 0) {
                 Geometry target = results.getClosestCollision().getGeometry();
                 if (name.equals(MAPPING_PICKUP)) {
