@@ -63,9 +63,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private Geometry aggroCube;
     
     private static Box mesh = new Box(0.25f, 0.25f, 0.25f);
-    
-    private Ray chaseRay = new Ray();
-    
+        
     private final static Trigger TRIGGER_PICKUP =
         new MouseButtonTrigger(MouseInput.BUTTON_LEFT);
 //            
@@ -146,6 +144,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         
         // Aggro Cube
         aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
+        aggroCube.addControl(new CubeChaserControl(cam, rootNode));
         rootNode.attachChild(aggroCube);
         
         // Mappings
@@ -199,15 +198,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
             rotateR.multLocal(viewDirection);
         }
         playerControl.setViewDirection(viewDirection); // turn!
-        
-        if (cam.getLocation().distance(aggroCube.getLocalTranslation())
-       < 12) {
-           Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
-           Vector3f directionToCam = camDown.subtract(aggroCube.getLocalTranslation()).normalize();
-//           aggroCube.move(directionToCamera);
-             aggroCube.setLocalTranslation(aggroCube.getLocalTranslation().addLocal(directionToCam.mult(0.08f)));
-         }
-        
+                
         
     }
       
@@ -281,21 +272,13 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         
         @Override
         protected void controlUpdate(float tpf) {
-            CollisionResults results = new CollisionResults();
-            ray.setOrigin(cam.getLocation());
-            ray.setDirection(cam.getDirection());
-            rootNode.collideWith(ray, results);
-            if (results.size() > 0) {
-                Geometry target = results.getClosestCollision().
-                getGeometry();
-                // interact with target
-                if (target.equals(spatial)) {
-                if (cam.getLocation().distance(spatial.getLocalTranslation()) <
-                10) {
-                    spatial.move(cam.getDirection());
+            
+                    if (cam.getLocation().distance(spatial.getLocalTranslation()) <
+                    12) {
+                        Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
+                        Vector3f directionToCam = camDown.subtract(spatial.getLocalTranslation()).normalize();
+                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.08f)));
                     }
-                }
-            }
         }
         protected void controlRender(RenderManager rm, ViewPort vp) {
         }
