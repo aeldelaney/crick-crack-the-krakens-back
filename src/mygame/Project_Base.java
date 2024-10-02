@@ -273,13 +273,15 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         @Override
         protected void controlUpdate(float tpf) {
             
+                    // Make Cube jump up to face when close
+//                    if (cam.getLocation().distance(spatial.getLocalTranslation()) <
+//                    6.5) {
+//                        Vector3f camFront = cam.getLocation().add(new Vector3f (1,0,2));
+//                        Vector3f directionToCam = camFront.subtract(spatial.getLocalTranslation()).normalize();
+//                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.5f)));
+//                    }
+                    // Cube chase
                     if (cam.getLocation().distance(spatial.getLocalTranslation()) <
-                    6.5) {
-                        Vector3f camFront = cam.getLocation().add(new Vector3f (1,0,2));
-                        Vector3f directionToCam = camFront.subtract(spatial.getLocalTranslation()).normalize();
-                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.5f)));
-                    }
-                    else if (cam.getLocation().distance(spatial.getLocalTranslation()) <
                     13) {
                         Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
                         Vector3f directionToCam = camDown.subtract(spatial.getLocalTranslation()).normalize();
