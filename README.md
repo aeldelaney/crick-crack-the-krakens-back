@@ -14,6 +14,15 @@ This is an thriller escape game set in the depths of the ocean. The player awake
 ## Inspiration 
 
 ### [Subnautica](https://subnautica.fandom.com/wiki/Subnautica_Wiki)
+Subnautica the player being the sole survivor of a crashed spacecraft who must explore and survive in an ocean planet. He has to travel around different underwater bases in order to gather resources and seek shelter as he moves forward in the plotline.
+
+**1. Underwater base aesthetic**
+- Subnautica has a big emphasis on the underwater base aesthetic since the player will often end up scavenging in bases located along the planet. Since our game is set in an underwater base, we drew inspiration from this game when generating assets to set the environment based on the aesthetic references. An image of the game underwater bases can be seen below.
+<p alight="center">
+<img width="564" alt="image" src="https://github.com/user-attachments/assets/894f74e6-d5d0-4ce6-a47a-db513d411ccd">
+</p>
+<br/>
+<br/>
 
 ### The [Amnesia game series](https://store.steampowered.com/app/57300/Amnesia_The_Dark_Descent/)
 Amnesia: The Dark Descent is a game that focuses on player progression through a castle where the player starts off with no recollection of why they are there and must figure it out as they navigate through the castle. The main tools for survival in the game involve running and hiding instead of fighting, similar to what we aim to achieve by avoiding engaging with the creatures in our game. As the game progresses, more information is uncovered about the player as well as how to escape which is an element we will focus on when working on our project.
