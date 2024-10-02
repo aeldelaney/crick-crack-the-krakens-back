@@ -76,6 +76,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
   - Here the player can manually save their progress
 - The player can move using the `wasd` or `arrow keys` for movement
   - Moving around quickly generates noise
+  - The player can hold the `SHIFT` key to move more slowly and quietly
 - The player can hold their breath for [NUMBER OF SECONDS] seconds at a time using the `b` key
 - The player can point and click to interact with objects
   - The mouse icon will change to indicate that an object is interactable
@@ -83,7 +84,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
   - For puzzles, we intend to have animations for things like key insertion into a door, typing on keypads, etc.
   - Some interactable objects create noise
 - The player has a flashlight at the start that they can use to illuminate the base
-  - The player will use the `i` key to turn on/off the flashlight
+  - The player will use `right click` to turn on/off the flashlight
   - Turning the flashlight on and off creates noise
   - The flashlight has a rechargeable battery that runs out, so the player must return to base periodically to recharge
 - There is a sound meter to display how loud the player is being relative to the envrionment
@@ -95,7 +96,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 - To do this, the player has to solve puzzles to learn about the base and find their way to an escape pod
 - While trying to escape, the player has to avoid 2 enemies
   1. Primary: the Kraken
-    - The Kraken is colossal squid lurking about outside the base
+    - The Kraken is a colossal squid lurking about outside the base
     - It is attracted to light sources since there is little light in the depths of the ocean
     - At random intervals, the Kraken swims by and the player has to be careful to keep the lights off so as not to provoke it
       - When the Kraken is near the base, all other creatures swimming around outside go away and stop making sounds
@@ -106,13 +107,18 @@ One particular aspect we like about this game are the quick time events (QTEs). 
     - The creature is some unknown entity either created by the people on the base or discovered and experimented on -- who knows. Either way, it's been set loose.
     - It lurks around the base, moving slowly from area to area. If the creature is getting close to the player, they begin to notice signs of its presence: sounds, increasing anxiety levels
     - The creature is attracted by sound. If the player is over the sound threshold for more than [NUMBER OF SECONDS] seconds, then it is attracted
-    - When the creature is close, it can hear sound from any kind movement the player makes -- unless the player is holding their breath
     - The creature moves slower than the player, so to get away, the player must run far enough away such that their normal movements no longer alert the creature of their presence
+    - When the creature is too close, however, it can hear sound from any kind movement the player makes -- unless the player is holding their breath
+    - The player must complete Quick Time Events to escape the creature once it gets too close
+      - holding their breath
+      - staying still to avoid increased heart rate etc
+
+    
 
 ### Main Puzzles
 1. Find some document that tells you where x tool is
 2. See some code somewhere that let's you unlock keypad
-3. Fix a light to unlock area/object but player has to be careful in order to not alert the Kraken
+3. Generator with a little bit of juice left needed to unlock area/object but player has to be careful in order to not alert the Kraken since it lights up when used/makes noise
 4. (additional if making a secondary enemy) Find a noise maker somehow to distract the indoor creature so they can open the door to leave (opening the door makes too much noise for too long to escape otherwise)
 
 
