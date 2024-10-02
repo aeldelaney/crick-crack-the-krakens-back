@@ -156,9 +156,10 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 
   ![image](https://github.com/user-attachments/assets/73a966d5-2a63-4919-8666-368d90ff48b1)
 
-- We have CubeChaserControl to extend AbstractControl in order to simulate a potential monster attack on the user. The cube starts off in front of the user and then slowly creeps up to the user's face. This provides the skeleton elements for when the user gets attacked within the game if they fail at keeping down the light/sound within the game when needed.
+- We have CubeChaserControl to extend AbstractControl in order to simulate a potential monster attack on the user. The cube starts off in front of the user and then creeps up to/follows the user. This provides the skeleton elements for when the user gets attacked within the game if they fail at keeping down the light/sound within the game when needed.
 
-  ![image](https://github.com/user-attachments/assets/ddd486b0-b97e-45c0-92e4-c4bc4726bd21)
+  ![image](https://github.com/user-attachments/assets/3c94d595-eb1a-4656-8a2c-c0bf5773627b)
+
 
   
 
