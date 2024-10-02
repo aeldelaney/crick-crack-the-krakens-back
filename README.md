@@ -100,7 +100,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
     - It is attracted to light sources since there is little light in the depths of the ocean
     - At random intervals, the Kraken swims by and the player has to be careful to keep the lights off so as not to provoke it
       - When the Kraken is near the base, all other creatures swimming around outside go away and stop making sounds
-    - If the player has their light on near a window for more than [NUMBER OF SECONDS] seconds (idk maybe add some proximity factor as well), the Kraken is attracted back to the underwater base
+    - If the player has their light on near a window for more than [NUMBER OF SECONDS] seconds (we may add some proximity factor as well), the Kraken is attracted back to the underwater base
     - When the Kraken is aggravated, it latches onto the base and makes it shake for [NUMBER OF SECONDS] seconds. This makes the base lose [PERCENTAGE]% structural integrity. During this time, the player must remain quiet and have no lights on for it to go away. If the player fails, the Kraken destroys the base
     - Once the base reaches 0%, it collapses and the player dies
   3. Secondary: the creature
