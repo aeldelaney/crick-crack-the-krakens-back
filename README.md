@@ -16,8 +16,23 @@ This is an thriller escape game set in the depths of the ocean. The player awake
 ### [Subnautica](https://subnautica.fandom.com/wiki/Subnautica_Wiki)
 
 ### The [Amnesia game series](https://store.steampowered.com/app/57300/Amnesia_The_Dark_Descent/)
+Amnesia: The Dark Descent is a game that focuses on player progression through a castle where the player starts off with no recollection of why they are there and must figure it out as they navigate through the castle. The main tools for survival in the game involve running and hiding instead of fighting, similar to what we aim to achieve by avoiding engaging with the creatures in our game. As the game progresses, more information is uncovered about the player as well as how to escape which is an element we will focus on when working on our project.
 
-### [Until Dawn](https://www.playstation.com/en-us/games/until-dawn/)
+**1. Puzzle types**
+- The puzzles provide inspiration with the possibility of finding elements in other rooms/places in order to gather the necessary data to complete a specific puzzle to progress. An example can be seen below with the information on what levers need to be at what position is necessary to move on.
+<p align="center">
+<img width="628" alt="image" src="https://github.com/user-attachments/assets/fa739d62-5194-4acc-b3c0-732787a172bf">
+</p>
+<br/>
+<br/>
+
+**2. Holding a light**
+- The idea of a player holding the primary source of light to navigate as well as having limited light resources to move around is also an important aspect we looked into from this game. This helps set the mood as well as the general game dynamics as seen in the example image below.
+<p align="center">
+<img width="540" alt="image" src="https://github.com/user-attachments/assets/c6f9b649-0581-4fc6-9608-44447e1b0f28">
+</p>
+<br/>
+<br/>
 
 ### [colorbomb TRACE](https://colorbomb.itch.io/trace)
 TRACE is an online escape room game set on a sandy moon. The player navigates by clicking on arrows on the sides of the screen to change rooms or the direction they're facing. They interact with objects via point-and-click, and they can store items they find and take pictures of things they see. There are a few aspects of this game we're taking inspiration from
