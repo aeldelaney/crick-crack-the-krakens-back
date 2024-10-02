@@ -274,11 +274,18 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         protected void controlUpdate(float tpf) {
             
                     if (cam.getLocation().distance(spatial.getLocalTranslation()) <
-                    12) {
+                    6.5) {
+                        Vector3f camFront = cam.getLocation().add(new Vector3f (1,0,2));
+                        Vector3f directionToCam = camFront.subtract(spatial.getLocalTranslation()).normalize();
+                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.5f)));
+                    }
+                    else if (cam.getLocation().distance(spatial.getLocalTranslation()) <
+                    13) {
                         Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
                         Vector3f directionToCam = camDown.subtract(spatial.getLocalTranslation()).normalize();
-                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.08f)));
+                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.06f)));
                     }
+                     
         }
         protected void controlRender(RenderManager rm, ViewPort vp) {
         }
@@ -287,9 +294,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
            this.cam = cam;
            this.rootNode = rootNode;
         }
-
-           
-        
+ 
     }
 }
     
