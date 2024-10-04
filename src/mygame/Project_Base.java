@@ -30,7 +30,6 @@ import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.control.AbstractControl;
 
-
 /**
  * This is the Main Class of your Game. You should only do initialization here.
  * Move your Logic into AppStates or Controls
@@ -49,7 +48,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private boolean rotateLeft = false, rotateRight = false,
     rotateUp = false, rotateDown = false,
     forward = false, backward = false;
-    private final float speed=8;
+    private final float speed=16;
     
     private final static String MAPPING_PICKUP  = "Pickup Item";
     private final static String MAPPING_ROTATE = "Rotate";
@@ -128,19 +127,22 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         // Player
         playerNode = new Node("the player");
         playerNode.setLocalTranslation(new Vector3f(7, 0, -2));
+        //playerNode.setLocalRotation(new Quaternion(0,90,0,0));
         rootNode.attachChild(playerNode);
         
-        playerControl = new BetterCharacterControl(1.5f, 4, 30f);
+        playerControl = new BetterCharacterControl(1.5f, 8, 30f);
         playerControl.setJumpForce(new Vector3f(0, 200, 0));
         playerControl.setGravity(new Vector3f(0, -10, 0));
         playerNode.addControl(playerControl);
         bulletAppState.getPhysicsSpace().add(playerControl);
     
         // Item
-        item1 = myBox("item1", new Vector3f(1, 2, -5), ColorRGBA.White);
+        item1 = myBox("item1", new Vector3f(2, 4, -10), ColorRGBA.White);
 
         interactiveNode = (Node)sceneNode.getChild("interactive objects");
         interactiveNode.attachChild(item1);
+        //In case we need to debug if item is added to correct node
+        //System.out.println(item1.getParent());
         
         // Aggro Cube
         aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
@@ -163,14 +165,15 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         // Set the direction to SpatialToCamera, which means the camera will copy the movements of the Node
         camNode.setControlDir(CameraControl.
         ControlDirection.SpatialToCamera);
-        camNode.setLocalTranslation(new Vector3f(0, 4, -6));
+        camNode.setLocalTranslation(new Vector3f(0, 8, -6));
         Quaternion quat = new Quaternion();
         quat.lookAt(Vector3f.UNIT_Z, Vector3f.UNIT_Y);
         camNode.setLocalRotation(quat);
         //attaching the camNode to the playerNode
         playerNode.attachChild(camNode);
         camNode.setEnabled(true);
-        //disable the default 1st-person flyCam
+        //disable the default 1st-person flyCam  
+        // enable but disable the functionality for flycam
         flyCam.setEnabled(false);
         inputManager.setCursorVisible(true);
         // Get current forward and left vectors of the playerNode:
@@ -265,38 +268,38 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         };
     };
     
-    public class CubeChaserControl extends AbstractControl {
-        private Ray ray = new Ray();
-        private final Camera cam;
-        private final Node rootNode;
-        
-        @Override
-        protected void controlUpdate(float tpf) {
-            
-                    // Make Cube jump up to face when close
+//    public class CubeChaserControl extends AbstractControl {
+//        private Ray ray = new Ray();
+//        private final Camera cam;
+//        private final Node rootNode;
+//        
+//        @Override
+//        protected void controlUpdate(float tpf) {
+//            
+//                    // Make Cube jump up to face when close
+////                    if (cam.getLocation().distance(spatial.getLocalTranslation()) <
+////                    6.5) {
+////                        Vector3f camFront = cam.getLocation().add(new Vector3f (1,0,2));
+////                        Vector3f directionToCam = camFront.subtract(spatial.getLocalTranslation()).normalize();
+////                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.5f)));
+////                    }
+//                    // Cube chase
 //                    if (cam.getLocation().distance(spatial.getLocalTranslation()) <
-//                    6.5) {
-//                        Vector3f camFront = cam.getLocation().add(new Vector3f (1,0,2));
-//                        Vector3f directionToCam = camFront.subtract(spatial.getLocalTranslation()).normalize();
-//                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.5f)));
+//                    13) {
+//                        Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
+//                        Vector3f directionToCam = camDown.subtract(spatial.getLocalTranslation()).normalize();
+//                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.06f)));
 //                    }
-                    // Cube chase
-                    if (cam.getLocation().distance(spatial.getLocalTranslation()) <
-                    13) {
-                        Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
-                        Vector3f directionToCam = camDown.subtract(spatial.getLocalTranslation()).normalize();
-                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.06f)));
-                    }
-                     
-        }
-        protected void controlRender(RenderManager rm, ViewPort vp) {
-        }
-           
-        public CubeChaserControl(Camera cam, Node rootNode) {
-           this.cam = cam;
-           this.rootNode = rootNode;
-        }
- 
-    }
+//                     
+//        }
+//        protected void controlRender(RenderManager rm, ViewPort vp) {
+//        }
+//           
+//        public CubeChaserControl(Camera cam, Node rootNode) {
+//           this.cam = cam;
+//           this.rootNode = rootNode;
+//        }
+// 
+//    }
 }
     
