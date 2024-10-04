@@ -1,7 +1,5 @@
 # Crick Crack the Kraken's Back
 
-[game design document](https://en.wikipedia.org/wiki/Game_design_document)
-
 ## Game Summary
 This is an thriller escape game set in the depths of the ocean. The player awakens stranded on an underwater base without memory of what happened or why they're there. All they know is that they have to escape. To do so, the player must explore the base to learn how to leave and find the items needed to do so. However, there's more the player has to contend with. As the player moves about, they realize that they're not alone. A Kraken lurks outside the base, ready to attack at the wrong move, and some unknown entity lies in wait for the player inside the underwater base itself. Will you be able to escape?
 
