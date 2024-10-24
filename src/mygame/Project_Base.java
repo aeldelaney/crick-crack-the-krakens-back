@@ -24,6 +24,7 @@ import com.jme3.scene.control.CameraControl;
 import com.jme3.scene.shape.Box;
 import com.jme3.input.controls.*;
 import com.jme3.input.*;
+import com.jme3.light.SpotLight;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.renderer.Camera;
@@ -62,6 +63,8 @@ public class Project_Base extends SimpleApplication implements ActionListener {
     private Geometry aggroCube;
     
     private static Box mesh = new Box(0.25f, 0.25f, 0.25f);
+    
+    private SpotLight spot;
         
     private final static Trigger TRIGGER_PICKUP =
         new MouseButtonTrigger(MouseInput.BUTTON_LEFT);
@@ -117,12 +120,19 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         rootNode.attachChild(sceneNode);
         
         // Light
-        AmbientLight ambient = new AmbientLight();
-        rootNode.addLight(ambient);
-        DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(1.4f, -1.4f, -1.4f));
-        rootNode.addLight(sun);
+//        AmbientLight ambient = new AmbientLight();
+//        rootNode.addLight(ambient);
+//        DirectionalLight sun = new DirectionalLight();
+//        sun.setDirection(new Vector3f(1.4f, -1.4f, -1.4f));
+//        rootNode.addLight(sun);
         viewPort.setBackgroundColor(ColorRGBA.Cyan);
+        
+        // Spotlight
+        spot = new SpotLight();
+        spot.setSpotRange(200);
+        spot.setSpotOuterAngle(20 * FastMath.DEG_TO_RAD);
+        spot.setSpotInnerAngle(15 * FastMath.DEG_TO_RAD);
+        rootNode.addLight(spot);
         
         // Player
         playerNode = new Node("the player");
@@ -161,6 +171,10 @@ public class Project_Base extends SimpleApplication implements ActionListener {
 
     @Override
     public void simpleUpdate(float tpf) {
+        // Light updates
+        spot.setDirection(cam.getDirection());
+        spot.setPosition(cam.getLocation());
+        
         camNode = new CameraNode("CamNode", cam);
         // Set the direction to SpatialToCamera, which means the camera will copy the movements of the Node
         camNode.setControlDir(CameraControl.
