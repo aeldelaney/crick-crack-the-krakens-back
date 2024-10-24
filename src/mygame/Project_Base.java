@@ -174,8 +174,15 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         camNode.setEnabled(true);
         //disable the default 1st-person flyCam  
         // enable but disable the functionality for flycam
-        flyCam.setEnabled(false);
-        inputManager.setCursorVisible(true);
+        flyCam.setEnabled(true);
+        flyCam.setMoveSpeed(0);
+        flyCam.setDragToRotate(false);
+        flyCam.setRotationSpeed(2.0f);
+        flyCam.setZoomSpeed(0);
+        //playerNode.attachChild(flyCam);
+        
+                // setmovespeed, setrotationspeed (2.0f?), setdragtorotate, setzoomspeed
+        //inputManager.setCursorVisible(true);
         // Get current forward and left vectors of the playerNode:
         Vector3f modelForwardDir =
         playerNode.getWorldRotation().mult(Vector3f.UNIT_Z);
