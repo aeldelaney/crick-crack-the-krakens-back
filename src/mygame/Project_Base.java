@@ -129,7 +129,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         
         // Spotlight
         spot = new SpotLight();
-        spot.setSpotRange(200);
+        spot.setSpotRange(500);
         spot.setSpotOuterAngle(20 * FastMath.DEG_TO_RAD);
         spot.setSpotInnerAngle(15 * FastMath.DEG_TO_RAD);
         rootNode.addLight(spot);
