@@ -120,12 +120,13 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         rootNode.attachChild(sceneNode);
         
         // Light
-//        AmbientLight ambient = new AmbientLight();
-//        rootNode.addLight(ambient);
-//        DirectionalLight sun = new DirectionalLight();
-//        sun.setDirection(new Vector3f(1.4f, -1.4f, -1.4f));
-//        rootNode.addLight(sun);
-        viewPort.setBackgroundColor(ColorRGBA.Cyan);
+        //AmbientLight ambient = new AmbientLight();
+        //ambient.setColor(ColorRGBA.Red);
+        //rootNode.addLight(ambient);
+        //DirectionalLight sun = new DirectionalLight();
+        //sun.setDirection(new Vector3f(-1.4f, 1.4f, -1.4f));
+        //rootNode.addLight(sun);
+        //viewPort.setBackgroundColor(ColorRGBA.Cyan);
         
         // Spotlight
         spot = new SpotLight();
