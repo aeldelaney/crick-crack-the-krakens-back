@@ -1,0 +1,15 @@
+Material My Material : Common/MatDefs/Light/Lighting.j3md {
+     
+MaterialParameters {
+        Shininess :  1
+        ParallaxHeight :  0.05
+        GlowColor : 0.4 1.0 0.4 1.0
+        BackfaceShadows :  false
+        UseMaterialColors : false
+        VertexLighting : true
+        AlphaDiscardThreshold : 0.5
+     }
+    AdditionalRenderState {
+	AlphaTestFalloff 0.50
+    }
+}
