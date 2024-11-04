@@ -30,6 +30,19 @@ import com.jme3.math.Vector2f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.control.AbstractControl;
+import com.simsilica.lemur.Axis;
+import com.simsilica.lemur.Container;
+import com.simsilica.lemur.FillMode;
+import com.simsilica.lemur.GuiGlobals;
+import com.simsilica.lemur.Insets3f;
+import com.simsilica.lemur.Label;
+import static java.awt.SystemColor.window;
+import com.simsilica.lemur.*;
+import com.simsilica.lemur.component.SpringGridLayout;
+import com.simsilica.lemur.style.ElementId;
+import java.awt.Desktop.Action;
+import java.awt.List;
+import java.util.ArrayList;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -93,6 +106,8 @@ public class Project_Base extends SimpleApplication implements ActionListener {
 
     @Override
     public void simpleInitApp() {
+        GuiGlobals.initialize(this);
+        
         inputManager.addMapping("Forward",
         new KeyTrigger(KeyInput.KEY_W));
         inputManager.addMapping("Back",

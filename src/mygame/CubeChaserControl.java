@@ -18,7 +18,7 @@ import com.jme3.scene.control.AbstractControl;
  */
 public class CubeChaserControl extends AbstractControl {
     private Ray ray = new Ray();
-        private final Camera cam;
+        public final Camera cam;
         private final Node rootNode;
 
         @Override
