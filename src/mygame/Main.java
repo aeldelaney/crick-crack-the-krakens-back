@@ -84,7 +84,7 @@ public class Main extends SimpleApplication  {
         Main app = new Main();
         //Settings
         AppSettings settings = new AppSettings(true);
-        settings.setTitle("Crick Crack Kraken's Back");
+        settings.setTitle("Crick Crack The Kraken's Back");
         settings.setUseJoysticks(true);
         app.setShowSettings(true);
         BufferedImage[] icons=null;
@@ -187,9 +187,8 @@ public class Main extends SimpleApplication  {
   }
     
   public void  moveFromMainToTutorial()
-    {
-        
-        mainScreenState.setEnabled(false);
+    { 
+       mainScreenState.setEnabled(false);
        tutorialScreen.setEnabled(true);
      
     }
@@ -206,20 +205,20 @@ public class Main extends SimpleApplication  {
     }
  public void moveFromOptionsToMain()
      {
-     optionsAppState.setEnabled(false);
-     mainScreenState.setEnabled(true );
+        optionsAppState.setEnabled(false);
+        mainScreenState.setEnabled(true );
       }
  
   public void moveFromGameToMenu()
      {
-     mainScreenState.enableMusic();
-     gameScreen.setEnabled(false);
-     mainScreenState.setEnabled(true );
+        mainScreenState.enableMusic();
+        gameScreen.setEnabled(false);
+        mainScreenState.setEnabled(true );
       }
   public void moveFromTutorialToMenu()
      {
-      tutorialScreen.setEnabled(false);
-      mainScreenState.setEnabled(true );
+        tutorialScreen.setEnabled(false);
+        mainScreenState.setEnabled(true );
      }
  
 public void moveFromOptionsToOptionsLang( )

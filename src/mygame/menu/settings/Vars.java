@@ -3,8 +3,8 @@ package mygame.menu.settings;
  
 public class Vars {
     
-    public static String ASSET_IMAGE_BG="Textures/MainMenu/mainBG.jpg";
-    public static String ASSET_IMAGE_LOGO="Textures/MainMenu/mainLogo.png";
+    public static String ASSET_IMAGE_BG="Textures/MainMenu/menu_wallpaper.png";
+    public static String ASSET_IMAGE_LOGO="Textures/MainMenu/title.png";
     public static String ASSET_IMAGE_GRAPHIC="Textures/MainMenu/mainGraphic.png";
     
     public static String ASSET_IMAGE_RADIO_ON="Textures/MainMenu/progressSignOn.png";

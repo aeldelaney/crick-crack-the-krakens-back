@@ -129,7 +129,7 @@ public class MenuMainScreen extends BaseAppState implements ActionListener, Mous
         //LOGO
         logoImage=declareImage((int)(this.viewPort.getCamera().getHeight()/1.5f),  (this.viewPort.getCamera().getHeight()/10), logoLeftMargin,  this.viewPort.getCamera().getHeight()-logoTopMargin,Vars.ASSET_IMAGE_LOGO);
        //GRAPHIC
-        graphImage=declareImage((int)(this.viewPort.getCamera().getHeight()/2.5f),  (this.viewPort.getCamera().getHeight()/2), (int)(this.viewPort.getCamera().getWidth()-this.viewPort.getCamera().getHeight()/2-graphRightMargin),(int)(this.viewPort.getCamera().getHeight()/2+graphBottomMargin),Vars.ASSET_IMAGE_GRAPHIC);
+//        graphImage=declareImage((int)(this.viewPort.getCamera().getHeight()/2.5f),  (this.viewPort.getCamera().getHeight()/2), (int)(this.viewPort.getCamera().getWidth()-this.viewPort.getCamera().getHeight()/2-graphRightMargin),(int)(this.viewPort.getCamera().getHeight()/2+graphBottomMargin),Vars.ASSET_IMAGE_GRAPHIC);
        
             
         /////////////////////////////BUTTONS//////////////////////  
