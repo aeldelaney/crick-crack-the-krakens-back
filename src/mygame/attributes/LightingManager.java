@@ -18,8 +18,8 @@ public class LightingManager {
     private SpotLight spot;
     
     private BulletAppState bulletAppState;
-    private Camera cam;  // Camera for look direction
-    private InputManager inputManager; // For handling input
+    private Camera cam;
+    private InputManager inputManager;
     
     public LightingManager(BulletAppState bulletAppState, Node rootNode, Camera cam, InputManager inputManager, AppSettings settings) {
         this.bulletAppState = bulletAppState;
@@ -43,10 +43,6 @@ public class LightingManager {
         spot.setSpotOuterAngle(20 * FastMath.DEG_TO_RAD);
         spot.setSpotInnerAngle(15 * FastMath.DEG_TO_RAD);
         rootNode.addLight(spot);
-        
-        // Light updates
-//        spot.setDirection(cam.getDirection());
-//        spot.setPosition(cam.getLocation());
     }
     
     public void updateSpotlight() {

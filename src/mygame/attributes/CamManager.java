@@ -4,12 +4,12 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.input.FlyByCamera;
 import com.jme3.input.InputManager;
 
-public class CameraManager {
+public class CamManager {
 
     private FlyByCamera flyCam;
     private InputManager inputManager;
 
-    public CameraManager(SimpleApplication app) {
+    public CamManager(SimpleApplication app) {
         this.flyCam = app.getFlyByCamera();
         this.inputManager = app.getInputManager();
 
@@ -17,14 +17,12 @@ public class CameraManager {
     }
 
     private void setupCamera() {
-        // Enable FlyCam and customize it
         flyCam.setEnabled(true);
-        flyCam.setMoveSpeed(0);          // Disable movement
-        flyCam.setRotationSpeed(2.0f);   // Adjust rotation speed as needed
-        flyCam.setDragToRotate(false);   // Ensure mouse movement rotates the camera
-        flyCam.setZoomSpeed(0);          // Disable zoom
+        flyCam.setMoveSpeed(0);
+        flyCam.setDragToRotate(false);
+        flyCam.setRotationSpeed(2.0f); 
+        flyCam.setZoomSpeed(0);
 
-        // Hide the cursor
         inputManager.setCursorVisible(false);
     }
 }

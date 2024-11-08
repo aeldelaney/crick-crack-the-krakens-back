@@ -11,11 +11,11 @@ import com.jme3.system.AppSettings;
 
 public class PlayerManager {
 
-    private CharacterControl player;     // Player control
-    private Node playerNode;             // Player node
+    private CharacterControl player;
+    private Node playerNode;
     private BulletAppState bulletAppState;
-    private Camera cam;                  // Camera for look direction
-    private InputManager inputManager;   // For handling input
+    private Camera cam;
+    private InputManager inputManager;
     private float playerMoveSpeed = 0.1f;
 
     public PlayerManager(BulletAppState bulletAppState, Node rootNode, Camera cam, InputManager inputManager, AppSettings settings) {
@@ -24,13 +24,12 @@ public class PlayerManager {
         this.inputManager = inputManager;
     }
 
-    // Initialize the player with movement and collision
+    // Set up yhe player
     public void setupPlayer() {
-//        CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(1.25f, 2f, 1);
         CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(6f, 2f, 1);
-        player = new CharacterControl(capsuleShape, 0.05f);  // Add physics control
+        player = new CharacterControl(capsuleShape, 0.05f);
 
-        player.getCollisionShape().setMargin(0.01f);  // Reduce collision margin for more precise collision detection
+        player.getCollisionShape().setMargin(0.01f);
 
         playerNode = new Node("Player");
         playerNode.addControl(player);
@@ -44,16 +43,13 @@ public class PlayerManager {
         bulletAppState.getPhysicsSpace().add(player);
     }
 
-    // Return the player's current position (for camera)
     public Vector3f getPlayerPosition() {
         return player.getPhysicsLocation();
     }
 
-    // Handle player movement based on key inputs
     public void movePlayer(boolean left, boolean right, boolean forward, boolean backward) {
         Vector3f walkDirection = new Vector3f();
 
-        // Use camera direction for movement
         Vector3f camDir = cam.getDirection().clone().setY(0).normalizeLocal();
         Vector3f camLeft = cam.getLeft().clone().setY(0).normalizeLocal();
 
@@ -71,6 +67,6 @@ public class PlayerManager {
         }
 
         player.setWalkDirection(walkDirection);
-        player.setViewDirection(camDir);  // Orient the player to face the camera direction
+        player.setViewDirection(camDir);
     }
 }

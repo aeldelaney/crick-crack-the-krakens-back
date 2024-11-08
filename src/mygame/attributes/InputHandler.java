@@ -11,12 +11,11 @@ import com.jme3.input.controls.MouseButtonTrigger;
 public class InputHandler {
 
     private InputManager inputManager;
-    private PlayerInteractionManager interactionManager;
+    private PlayerActionsManager interactionManager;
 
-    // Movement flags
     private boolean left = false, right = false, forward = false, backward = false;
 
-    public InputHandler(Application app, PlayerInteractionManager interactionManager) {
+    public InputHandler(Application app, PlayerActionsManager interactionManager) {
         this.inputManager = app.getInputManager();
         this.interactionManager = interactionManager;
 
@@ -24,14 +23,11 @@ public class InputHandler {
     }
 
     private void setupKeys() {
+        inputManager.addMapping("Interact", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
         inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
         inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
         inputManager.addMapping("Forward", new KeyTrigger(KeyInput.KEY_W));
         inputManager.addMapping("Backward", new KeyTrigger(KeyInput.KEY_S));
-
-        // Add a mouse mapping for interaction (left mouse button)
-        inputManager.addMapping("Interact", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
-
         inputManager.addListener(actionListener, "Left", "Right", "Forward", "Backward", "ToggleCrosshair", "Interact");
     }
 
@@ -53,7 +49,6 @@ public class InputHandler {
                     break;
                 case "Interact":
                     if (isPressed) {
-                        // Delegate interaction to the PlayerInteractionManager
                         interactionManager.handleInteraction();
                     }
                     break;
@@ -61,7 +56,6 @@ public class InputHandler {
         }
     };
 
-    // Getter methods for movement flags
     public boolean isLeft() {
         return left;
     }

@@ -31,10 +31,10 @@ import com.jme3.input.event.MouseButtonEvent;
 import com.jme3.input.event.MouseMotionEvent;
 import com.jme3.input.event.TouchEvent;
 import com.jme3.input.JoystickButton;
-import mygame.attributes.CameraManager;
+import mygame.attributes.CamManager;
 import mygame.attributes.InputHandler;
-import mygame.attributes.PhysicsHelper;
-import mygame.attributes.PlayerInteractionManager;
+import mygame.attributes.PhysicsHandler;
+import mygame.attributes.PlayerActionsManager;
 import mygame.attributes.PlayerManager;
 import mygame.attributes.SceneManager;
 
@@ -43,8 +43,8 @@ public class OldGameScreen extends BaseAppState implements ActionListener, Pause
     private BulletAppState bulletAppState;  // Physics system
     private PlayerManager playerManager;
     private SceneManager sceneManager;
-    private PlayerInteractionManager interactionManager; // Interaction manager
-    private CameraManager cameraManager; // Camera manager
+    private PlayerActionsManager interactionManager; // Interaction manager
+    private CamManager cameraManager; // Camera manager
     private InputHandler inputHandler; // Input handler
     private boolean nextScene = false;
     private final static Trigger TRIGGER_P= new KeyTrigger(KeyInput.KEY_P);
@@ -87,7 +87,7 @@ public class OldGameScreen extends BaseAppState implements ActionListener, Pause
         stateManager.attach(bulletAppState);
 
         // Initialize the camera manager
-        cameraManager = new CameraManager(this.app);
+        cameraManager = new CamManager(this.app);
 
         // Initialize player and scene managers
         playerManager = new PlayerManager(
@@ -109,7 +109,7 @@ public class OldGameScreen extends BaseAppState implements ActionListener, Pause
         sceneManager.setupScene();
 
         // Initialize the interaction manager
-        interactionManager = new PlayerInteractionManager(
+        interactionManager = new PlayerActionsManager(
             this.app,
             bulletAppState.getPhysicsSpace()
         );
