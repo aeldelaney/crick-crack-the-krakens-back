@@ -158,9 +158,10 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 
   ![image](https://github.com/user-attachments/assets/3c94d595-eb1a-4656-8a2c-c0bf5773627b)
 
-
-  
-
-
-
+  ### Second Deliverable
+  - I added some texture to the floors, walls, and boxes within the scene so that the user felt more immersed with their surroundings. I also changed the lighting to flashlight in order to allow for a darker and more   mysterious feel to the game compared to before. A skeleton human as been added on the side, but there is also a similar also rigged inside the green glowing cylinder. Objects were imported through blender, as were the textures and they were created by hand instead of using read-made-assets online.
+  ![image](https://github.com/user-attachments/assets/ee4ed3e9-145e-4e4c-8fef-2f22f41ac10f)
+  - If running base_project.java, the changes mentioned above will be noticable. The physics is still present in the scene as the character moves around the room. Additional rooms were added but not texturized for   potential expansion.
+  - In the main.java file, the gui for the main menu was added. The menu includes music, a placeholder for the trailer, sound control, tutorial placeholders, and more. The main menu runs separately from the program and when pressing "play" runs a simple cube application. If you press "esc", it brings up a miniature menu. This is due to the need to reformat project_base.java from simpleApplication to appBase classes which, considering my time constrictions and solo work on the project, was hard to fit into the alloted time space. To run main.java without error, the groovy-all.jar file from the top level of the directory needs to be manually imported into libraries as it is outdated and can barely be found online, much less directly downloaded by the system. The menu boasts a nice UI representative of the mood of the game along with some music running in the back for more atmosphere.
+ ![image](https://github.com/user-attachments/assets/61731c85-5b11-4375-8aa0-622e38dea687)
 
