@@ -3,7 +3,6 @@ package mygame.menu.screens;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
@@ -32,17 +31,14 @@ import com.jme3.input.event.MouseButtonEvent;
 import com.jme3.input.event.MouseMotionEvent;
 import com.jme3.input.event.TouchEvent;
 import com.jme3.input.JoystickButton;
-import com.jme3.math.Vector3f;
 import mygame.attributes.CameraManager;
 import mygame.attributes.InputHandler;
 import mygame.attributes.PhysicsHelper;
 import mygame.attributes.PlayerInteractionManager;
 import mygame.attributes.PlayerManager;
 import mygame.attributes.SceneManager;
-import mygame.attributes.CameraManager;
-import mygame.attributes.LightingManager;
 
-public class GameScreen extends AbstractAppState implements ActionListener, PauseOverlay.PauseListener {
+public class OldGameScreen extends BaseAppState implements ActionListener, PauseOverlay.PauseListener {
     
     private BulletAppState bulletAppState;  // Physics system
     private PlayerManager playerManager;
@@ -50,7 +46,6 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
     private PlayerInteractionManager interactionManager; // Interaction manager
     private CameraManager cameraManager; // Camera manager
     private InputHandler inputHandler; // Input handler
-    private LightingManager lightingManager; // Lighting manager
     private boolean nextScene = false;
     private final static Trigger TRIGGER_P= new KeyTrigger(KeyInput.KEY_P);
     private final static String MAPPING_SCENE = "Next Scene";
@@ -108,16 +103,6 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
             this.app.getRootNode(),
             this.app.getAssetManager()
         );
-        
-        // Initialize the lighting manager
-        lightingManager = new LightingManager(
-            bulletAppState,
-            this.app.getRootNode(),
-            this.app.getCamera(),
-            this.app.getInputManager(),
-            this.app.getContext().getSettings()
-        );
-        lightingManager.setupLighting();
 
         // Set up the player and the scene
         playerManager.setupPlayer();
@@ -128,13 +113,6 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
             this.app,
             bulletAppState.getPhysicsSpace()
         );
-
-        // Initialize the crosshair manager
-//        crosshairManager = new CrosshairManager(
-//            this.app.getAssetManager(),
-//            this.app.getContext().getSettings(),
-//            this.app.getGuiNode()
-//        );
 
         // Initialize the input handler
         inputHandler = new InputHandler(
@@ -160,65 +138,14 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
 //        viewPort.setBackgroundColor(ColorRGBA.Black);
      
     }
-    
-    @Override
-    public void update(float tpf) {
-        // Synchronize the camera position with the player
-        float playerHeight = 0f;  // Adjust based on your player's height
-        Vector3f playerPosition = playerManager.getPlayerPosition();
-        if (playerPosition != null) {
-            app.getCamera().setLocation(playerPosition.add(0, playerHeight, 0));
-        } else {
-            System.out.println("Player position is null");
-        }
-
-        // Apply movement based on input handler's movement flags
-        playerManager.movePlayer(
-                inputHandler.isLeft(),
-                inputHandler.isRight(),
-                inputHandler.isForward(),
-                inputHandler.isBackward()
-        );
-        
-        lightingManager.updateSpotlight();
-
-        // Update the interaction manager
-        interactionManager.update(tpf);
-    }
-    
-    @Override
-    public void cleanup() {
-        super.cleanup();
-        nextScene = false;
-
-        // Clean up resources and detach states if necessary
-        app.getStateManager().detach(bulletAppState);
-        inputManager.removeListener(actionListener);
-        
-        //rootNode.getChild("Floor").getParent().scale(0.00001f);
-    }
-    
-    public boolean getNextScene() {
-        return nextScene;
-    }
-    
-    // Optional: Implement stateAttached and stateDetached if needed
-    @Override
-    public void stateAttached(AppStateManager stateManager) {
-       super.stateAttached(stateManager);
-        // Called when the state is attached to the state manager
-    }
 
     @Override
-    public void stateDetached(AppStateManager stateManager) {
-        super.stateDetached(stateManager);
-        // Called when the state is detached from the state manager
-    }
-    
-    
-    
-    
+    protected void initialize(Application app) {
+     }
 
+    @Override
+    protected void cleanup(Application app) {
+     }
   /**
     * Service keys and muouse only in this state. Disable once the state is switched
     */
@@ -243,6 +170,7 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
           inputManager.removeRawInputListener( joystickEventListener );  
     }
   
+    @Override
     protected void onEnable() {
         rootNode.attachChild(localRootNode);
         guiNode.attachChild(localGuiNode);
@@ -257,6 +185,7 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
       
      }
 
+    @Override
     protected void onDisable() {
          rootNode.detachChild(localRootNode);
          guiNode.detachChild(localGuiNode);
@@ -332,11 +261,9 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
      */   
     protected class JoystickEventListener implements RawInputListener {
 
-        @Override
         public void onJoyAxisEvent(JoyAxisEvent evt) {
         }
         
-        @Override
  public void onJoyButtonEvent(JoyButtonEvent evt) {
          if(  evt.getButton().getLogicalId().equals(JoystickButton.BUTTON_6)  || evt.getButton().getLogicalId().equals(JoystickButton.BUTTON_8) )  
                     {
@@ -351,17 +278,11 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
                      }
         }
 
-        @Override
         public void beginInput() {}
-        @Override
         public void endInput() {}
-        @Override
         public void onMouseMotionEvent(MouseMotionEvent evt) {}
-        @Override
         public void onMouseButtonEvent(MouseButtonEvent evt) {}
-        @Override
         public void onKeyEvent(KeyInputEvent evt) {}
-        @Override
         public void onTouchEvent(TouchEvent evt) {}        
     }
 }
