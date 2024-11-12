@@ -5,7 +5,6 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Quaternion;
 import mygame.*;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
@@ -19,7 +18,7 @@ import com.jme3.scene.shape.Box;
 import java.util.Random;
 import mygame.attributes.PhysicsHandler;
 
-public class EnemyChaserControl extends AbstractControl {
+public class EnemyChaserControl1 extends AbstractControl {
     private Ray ray = new Ray();
     public final Camera cam;
     private final Node rootNode;
@@ -32,9 +31,8 @@ public class EnemyChaserControl extends AbstractControl {
     private Vector3f wanderDirection = Vector3f.ZERO; // Default to no movement
     private float wanderTimer = 0f; // Timer for random direction change
         
-    private RigidBodyControl physicsControl;  // Store the RigidBodyControl reference
     
-    public EnemyChaserControl(Camera cam, Node rootNode, AssetManager assetManager, BulletAppState bulletAppState) {
+    public EnemyChaserControl1(Camera cam, Node rootNode, AssetManager assetManager, BulletAppState bulletAppState) {
         this.cam = cam;
         this.rootNode = rootNode;
         this.assetManager = assetManager;
@@ -43,27 +41,31 @@ public class EnemyChaserControl extends AbstractControl {
         
     public void setupEnemy() {
         // Aggro Cube
+        //aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
         aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
+        //aggroCube = myBox("Scared Cube", new Vector3f(13, 4, 9), ColorRGBA.Red);
         aggroCube.addControl(new EnemyChaserControl(cam, rootNode, assetManager, bulletAppState));
         rootNode.attachChild(aggroCube);
         bulletAppState.getPhysicsSpace().add(aggroCube);
         bulletAppState.setDebugEnabled(true);
         
-        // Create and attach RigidBodyControl
-        physicsControl = new RigidBodyControl(1.0f);  // Set mass to 1 for the cube
+        
+        float mass = false ? 1.0f : 0.0f;
+
+        RigidBodyControl physicsControl = new RigidBodyControl(mass);
         aggroCube.addControl(physicsControl);
+
         bulletAppState.getPhysicsSpace().add(physicsControl);
+        // new rigidbody control
+        // set velocity and direction through the rigidbody control; setlinearvelocity
+        // return the rigid body controler from the physicshandler
     }
 
     @Override
     protected void controlUpdate(float tpf) {
         
-        if (physicsControl == null) {
-            return;  // Early return if the physics control is not yet initialized
-        }
-        
         // Set the wandering speed and random movement timer
-        float wanderSpeed = 10f;  // Adjust speed as needed
+        float wanderSpeed = 0.01f;
         float stopDistance = 13f;  // Distance at which the enemy starts chasing the player
         float wanderChangeInterval = 2f;  // Time interval (in seconds) to change the wander direction
         
@@ -77,12 +79,10 @@ public class EnemyChaserControl extends AbstractControl {
             wanderDirection = new Vector3f(randomX, 0, randomZ).normalize();  // Normalize to get a unit vector
             wanderTimer = wanderChangeInterval;  // Reset timer for next direction change
         }
-
         // Move the enemy in the current wandering direction if not close to the player
         if (cam.getLocation().distance(spatial.getLocalTranslation()) > stopDistance) {
-            // Set the velocity to wander around
-            Vector3f velocity = wanderDirection.mult(wanderSpeed);
-            physicsControl.setLinearVelocity(velocity);  // Apply velocity directly through physics control
+            // Wander around
+            spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(wanderDirection.mult(wanderSpeed)));
 
             // Decrease the wander timer
             wanderTimer -= tpf;
@@ -92,25 +92,49 @@ public class EnemyChaserControl extends AbstractControl {
             directionToCam.setY(0);  // Ignore the Y component
             directionToCam.normalize();  // Normalize to get a unit direction
 
-            // Apply velocity to move towards the camera
-            Vector3f velocity = directionToCam.mult(10f);  // Adjust speed as needed
-            physicsControl.setLinearVelocity(velocity);  // Apply velocity
+            // Move the enemy towards the camera
+            spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.001f)));
 
-            // Optional: Rotate the enemy to face the camera using physics control
-            if (velocity.length() > 0) {
-                Quaternion lookRotation = new Quaternion();
-                lookRotation.lookAt(directionToCam, Vector3f.UNIT_Y);
-                physicsControl.setPhysicsRotation(lookRotation);  // Apply rotation via physics control
-            }
+            // Ensure the enemy's Y position does not sink below the ground level
+            Vector3f currentPosition = spatial.getLocalTranslation();
+            currentPosition.setY(Math.max(currentPosition.y, 0.5f));  // Keep the enemy above the ground
+            spatial.setLocalTranslation(currentPosition);
         }
         
-        // Decrease wanderTimer each frame
-        wanderTimer -= tpf;
+        
+
+        // Make Cube jump up to face when close
+    //                    if (cam.getLocation().distance(spatial.getLocalTranslation()) <
+    //                    6.5) {
+    //                        Vector3f camFront = cam.getLocation().add(new Vector3f (1,0,2));
+    //                        Vector3f directionToCam = camFront.subtract(spatial.getLocalTranslation()).normalize();
+    //                        spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.5f)));
+    //                    }
+            // Cube chase
+//        if (cam.getLocation().distance(spatial.getLocalTranslation()) < 13) {
+////            Vector3f camDown = cam.getLocation().add(new Vector3f (0,-3.75f,0));
+////            //Vector3f camDown = cam.getLocation().add(new Vector3f (0,0,0));
+////            Vector3f directionToCam = camDown.subtract(spatial.getLocalTranslation()).normalize();
+////            spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.02f)));
+//        // Move enemy toward the camera
+//            // Get the direction vector from the enemy to the camera (ignoring Y-axis)
+//            Vector3f directionToCam = cam.getLocation().subtract(spatial.getLocalTranslation());
+//            directionToCam.setY(0); // Set the Y component to 0 so it doesn't move up or down
+//            directionToCam.normalize(); // Normalize to get the direction vector
+//
+//            // Move the enemy in the x/z plane toward the camera
+//            spatial.setLocalTranslation(spatial.getLocalTranslation().addLocal(directionToCam.mult(0.001f)));
+//
+//            // Ensure the enemy's Y position does not sink below the ground level
+//            Vector3f currentPosition = spatial.getLocalTranslation();
+//            currentPosition.setY(Math.max(currentPosition.y, .5f)); // groundLevel is your desired y-coordinate
+//            spatial.setLocalTranslation(currentPosition);
+//        }
+
     }
         
     @Override
     protected void controlRender(RenderManager rm, ViewPort vp) {
-        // No rendering logic needed
     }
         
     public Geometry myBox(String name, Vector3f loc, ColorRGBA color) {
@@ -119,6 +143,8 @@ public class EnemyChaserControl extends AbstractControl {
         mat.setColor("Color", color);
         geom.setMaterial(mat);
         geom.setLocalTranslation(loc);
+        //PhysicsHandler.addPhysics(geom, false, bulletAppState);
         return geom;
     }
+    
 }
