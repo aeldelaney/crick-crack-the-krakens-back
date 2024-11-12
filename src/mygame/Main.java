@@ -27,6 +27,7 @@ import mygame.menu.screens.MenuMainScreen;
 import mygame.menu.screens.OptionsMainScreen;
 import mygame.menu.screens.OptionsLangScreen;
 import mygame.menu.screens.TutorialScreen;
+import mygame.menu.screens.YouWinScreen;
 import mygame.menu.settings.GameSettings;
 import mygame.menu.settings.SaveHelper;
 import mygame.menu.settings.SaveObject;
@@ -64,6 +65,7 @@ public class Main extends SimpleApplication  {
   private TutorialScreen tutorialScreen;
   private GameScreen gameScreen;
   private Project_Base projectBase;
+  private YouWinScreen youWinScreen;
   
   //Audio
   MenuAudioEffectsHelper menuAudioEffectsHelper ;
@@ -143,6 +145,7 @@ public class Main extends SimpleApplication  {
     tutorialScreen=new TutorialScreen();
     loadingGameAppState= new  LoadingPreGameScreen();
     gameScreen=new GameScreen();
+    youWinScreen = new YouWinScreen();
     //Step 2 - init
     loadingPreMenuScreen.init(stateManager, this );
     mainScreenState.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
@@ -235,6 +238,17 @@ public void moveFromOptionsToOptionsLang( )
       optionsAppState.setEnabled(true );
          
  }
+ 
+    public void moveFromGameToWin() {
+        gameScreen.setEnabled(false);
+        youWinScreen.setEnabled(true);
+    }
+
+    public void moveFromWinToMenu() {
+        youWinScreen.setEnabled(false);
+        mainScreenState.enableMusic();
+        mainScreenState.setEnabled(true);
+    }
  
     
    

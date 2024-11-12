@@ -41,6 +41,7 @@ import mygame.attributes.PlayerManager;
 import mygame.attributes.SceneManager;
 import mygame.attributes.CamManager;
 import mygame.attributes.LightingManager;
+import mygame.enemy.EnemyChaserControl;
 
 public class GameScreen extends AbstractAppState implements ActionListener, PauseOverlay.PauseListener {
     
@@ -51,6 +52,7 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
     private CamManager cameraManager; // Camera manager
     private InputHandler inputHandler; // Input handler
     private LightingManager lightingManager; // Lighting manager
+    private EnemyChaserControl enemyChaserControl; // Enemy control
     private boolean nextScene = false;
     private final static Trigger TRIGGER_P= new KeyTrigger(KeyInput.KEY_P);
     private final static String MAPPING_SCENE = "Next Scene";
@@ -64,12 +66,14 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
     private final Node localRootNode = new Node("Settings Screen RootNode");
     private final Node localGuiNode = new Node("Settings Screen GuiNode");
     private Trigger escape_trigger = new KeyTrigger(KeyInput.KEY_ESCAPE);
+    private boolean gameEnded = false;
+    
     FilterPostProcessor fpp;
     PauseOverlay pauseOverlay;
     //Audio
     MenuAudioEffectsHelper menuAudioEffectsHelper ;
     JoystickEventListener joystickEventListener;
-    public void init(AppStateManager stateManager, Application app,MenuAudioEffectsHelper menuAudioEffectsHelper ) {
+    public void init(AppStateManager stateManager, Application app, MenuAudioEffectsHelper menuAudioEffectsHelper ) {
         super.initialize(stateManager, app);  
         
         this.app = (Main) app;
@@ -87,7 +91,6 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         inputManager.addMapping(MAPPING_SCENE, TRIGGER_P);
         inputManager.addListener(actionListener, MAPPING_SCENE);
 
-        // Initialize Bullet Physics System
         bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);
 
@@ -103,6 +106,7 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
             this.app.getContext().getSettings()
         );
 
+        // Initialize the scene
         sceneManager = new SceneManager(
             bulletAppState,
             this.app.getRootNode(),
@@ -118,6 +122,15 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
             this.app.getContext().getSettings()
         );
         lightingManager.setupLighting();
+        
+        // Initialize the enemy
+        enemyChaserControl = new EnemyChaserControl(
+            this.app.getCamera(),
+            this.app.getRootNode(),
+            this.app.getAssetManager(),
+            bulletAppState
+        );
+        enemyChaserControl.setupEnemy();
 
         // Set up the player and the scene
         playerManager.setupPlayer();
@@ -126,31 +139,15 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         // Initialize the interaction manager
         interactionManager = new PlayerActionsManager(
             this.app,
-            bulletAppState.getPhysicsSpace()
+            bulletAppState.getPhysicsSpace(),
+            this.app.getAssetManager()
         );
-
-        // Initialize the crosshair manager
-//        crosshairManager = new CrosshairManager(
-//            this.app.getAssetManager(),
-//            this.app.getContext().getSettings(),
-//            this.app.getGuiNode()
-//        );
 
         // Initialize the input handler
         inputHandler = new InputHandler(
             this.app,
             interactionManager
         );
-        //
-//        Box b = new Box(1, 1, 1);
-//        Geometry geom = new Geometry("Box", b);
-//        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-//        mat.setColor("Color", ColorRGBA.Blue);
-//        geom.setMaterial(mat);
-//         
-//        localRootNode.attachChild(geom);
-        //
-        
         
         fpp = new FilterPostProcessor(assetManager);
         //Pause overlay
@@ -184,6 +181,9 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
 
         // Update the interaction manager
         interactionManager.update(tpf);
+        if (interactionManager.isEndGame()) {
+            app.moveFromGameToWin();
+        }
     }
     
     @Override

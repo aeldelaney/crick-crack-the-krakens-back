@@ -26,7 +26,7 @@ public class PlayerManager {
 
     // Set up yhe player
     public void setupPlayer() {
-        CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(6f, 2f, 1);
+        CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(1.25f, 2f, 1);
         player = new CharacterControl(capsuleShape, 0.05f);
 
         player.getCollisionShape().setMargin(0.01f);

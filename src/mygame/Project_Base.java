@@ -43,6 +43,7 @@ import com.simsilica.lemur.style.ElementId;
 import java.awt.Desktop.Action;
 import java.awt.List;
 import java.util.ArrayList;
+import mygame.enemy.EnemyChaserControl;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -172,7 +173,7 @@ public class Project_Base extends SimpleApplication implements ActionListener {
         
         // Aggro Cube
         aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
-        aggroCube.addControl(new CubeChaserControl(cam, rootNode));
+        aggroCube.addControl(new EnemyChaserControl(cam, rootNode, assetManager));
         rootNode.attachChild(aggroCube);
         
         // Mappings
