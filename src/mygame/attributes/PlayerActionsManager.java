@@ -173,7 +173,7 @@ public class PlayerActionsManager {
         // Create an interpolation control to move the door
         door.addControl(new AbstractControl() {
             private float elapsedTime = 0;
-            private float duration = 5.0f; // Time to complete the movement
+            private float duration = 500.0f; // Time to complete the movement
             private Vector3f startPosition = door.getLocalTranslation();
             private Vector3f endPosition = doorOpenPosition;
 
@@ -188,6 +188,8 @@ public class PlayerActionsManager {
                 if (progress >= 1.0f) {
                     spatial.removeControl(this);
                     rootNode.detachChild(door);
+                }
+                if (elapsedTime >= 3.0f) {
                     gameEnded = true;
                 }
             }

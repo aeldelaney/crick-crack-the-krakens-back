@@ -21,6 +21,7 @@ public class SceneManager {
     private Node sceneNode;
     private RigidBodyControl scenePhy;
     private Spatial doorSpatial;
+    private Spatial keypadSpatial;
 
     public SceneManager(BulletAppState bulletAppState, Node rootNode, AssetManager assetManager) {
         this.bulletAppState = bulletAppState;
@@ -37,7 +38,15 @@ public class SceneManager {
         rootNode.attachChild(sceneNode);
         
         createBox("Item1", new Vector3f(2, 4, -10), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Yellow, true);
-        createBox("card_swiper", new Vector3f(15f, 4, 0), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Green, false);
+        //createBox("card_swiper", new Vector3f(15f, 4, 0), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Green, false);
+        keypadSpatial = assetManager.loadModel("Models/keypad/keypad.j3o");
+        keypadSpatial.setName("card_swiper");
+        keypadSpatial.setLocalTranslation(new Vector3f(16, 4, 0));
+        keypadSpatial.setLocalScale(.75f, .75f, .75f); // x, y, z
+        keypadSpatial.rotate(0, FastMath.HALF_PI, 0);
+        PhysicsHandler.addPhysics(keypadSpatial, false, bulletAppState);
+        rootNode.attachChild(keypadSpatial);
+        
         doorSpatial = assetManager.loadModel("Models/door/door.j3o");
         doorSpatial.setName("door");
         doorSpatial.setLocalTranslation(new Vector3f(16, 4.5f, 5.9f)); // z (pos back), y (pos up), x
