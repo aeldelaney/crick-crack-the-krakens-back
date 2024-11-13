@@ -37,7 +37,8 @@ public class PlayerActionsManager {
     private Spatial heldItem = null;
     private RigidBodyControl heldItemControl = null;
     private AssetManager assetManager;
-    private boolean gameEnded = false;
+    private boolean gameWon = false;
+    private boolean gameFailed = false;
 
     // Manage what actions the player can perform
     public PlayerActionsManager(SimpleApplication app, PhysicsSpace physicsSpace, AssetManager assetManager) {
@@ -135,12 +136,20 @@ public class PlayerActionsManager {
         }
     }
     
-    public Boolean isEndGame() {
-        return gameEnded;
+    public Boolean isWonGame() {
+        return gameWon;
     }
     
-    public void restartEndGame() {
-        gameEnded = false;
+    public void restartWonGame() {
+        gameWon = false;
+    }
+    
+    public Boolean isFailedGame() {
+        return gameFailed;
+    }
+    
+    public void restartFailedGame() {
+        gameFailed = false;
     }
     
     private void openDoor(Spatial targetItem) {
@@ -190,7 +199,7 @@ public class PlayerActionsManager {
                     rootNode.detachChild(door);
                 }
                 if (elapsedTime >= 3.0f) {
-                    gameEnded = true;
+                    gameWon = true;
                 }
             }
 

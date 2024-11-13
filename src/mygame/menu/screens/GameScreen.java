@@ -182,22 +182,12 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         // Update the interaction manager
         interactionManager.update(tpf);
         
-        // Update the interaction manager
-//        interactionManager.update(tpf);
-//        if (interactionManager.isEndGame()) {
-//            nextScene = true;  // Set nextScene to true when the game ends
-//        }
-//
-//        // Check if it's time to move to the next scene (win screen)
-//        if (nextScene) {
-//            app.moveFromGameToWin();
-//            nextScene = false;  // Reset the flag after triggering the scene change
-//        }
-        
-        
-        if (interactionManager.isEndGame()) {
-            interactionManager.restartEndGame();
+        if (interactionManager.isWonGame()) {
+            interactionManager.restartWonGame();
             app.moveFromGameToWin();
+        } else if (interactionManager.isFailedGame()) {
+            interactionManager.restartFailedGame();
+            //app.moveFromGameToFail(); need to create
         }
     }
     

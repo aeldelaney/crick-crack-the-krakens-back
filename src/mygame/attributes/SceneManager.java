@@ -38,7 +38,6 @@ public class SceneManager {
         bulletAppState.getPhysicsSpace().add(sceneNode);
         rootNode.attachChild(sceneNode);
         
-        //createBox("key_card", new Vector3f(-10, 4, -13), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Yellow, true);
         keycardSpatial = assetManager.loadModel("Models/keypad/keypad.j3o");
         keycardSpatial.setName("key_card");
         keycardSpatial.setLocalTranslation(new Vector3f(-8f, 2f, -13));
@@ -48,7 +47,6 @@ public class SceneManager {
         PhysicsHandler.addPhysics(keycardSpatial, false, bulletAppState);
         rootNode.attachChild(keycardSpatial);
         
-        //createBox("key_card", new Vector3f(2, 4, -10), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Yellow, true);
         keypadSpatial = assetManager.loadModel("Models/keypad/keypad.j3o");
         keypadSpatial.setName("card_swiper");
         keypadSpatial.setLocalTranslation(new Vector3f(16, 4, 0));
@@ -64,22 +62,5 @@ public class SceneManager {
         doorSpatial.rotate(0, -FastMath.HALF_PI, 0);
         PhysicsHandler.addPhysics(doorSpatial, false, bulletAppState);
         rootNode.attachChild(doorSpatial);
-    }
-    
-        private void createBox(String name, Vector3f position, Vector3f size, ColorRGBA color, boolean canBePickedUp) {
-        // Create the box geometry
-        Box box = new Box(size.x, size.y, size.z);
-        Geometry geom = new Geometry(name, box);
-        geom.setLocalTranslation(position);
-
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", color);
-        geom.setMaterial(mat);  // Ensure the material is set
-
-        geom.setUserData("canBePickedUp", canBePickedUp);
-
-        PhysicsHandler.addPhysics(geom, canBePickedUp, bulletAppState);
-
-        rootNode.attachChild(geom);
     }
 }

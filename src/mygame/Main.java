@@ -28,6 +28,7 @@ import mygame.menu.screens.OptionsMainScreen;
 import mygame.menu.screens.OptionsLangScreen;
 import mygame.menu.screens.TutorialScreen;
 import mygame.menu.screens.YouWinScreen;
+//import mygame.menu.screens.YouFailScreen;
 import mygame.menu.settings.GameSettings;
 import mygame.menu.settings.SaveHelper;
 import mygame.menu.settings.SaveObject;
@@ -66,6 +67,7 @@ public class Main extends SimpleApplication  {
   private TutorialScreen tutorialScreen;
   private GameScreen gameScreen;
   private YouWinScreen youWinScreenAppState;
+  //private YouFailScreen youFailScreenAppState;
   
   //Audio
   MenuAudioEffectsHelper menuAudioEffectsHelper ;
@@ -149,6 +151,7 @@ public class Main extends SimpleApplication  {
     loadingGameAppState= new  LoadingPreGameScreen();
     gameScreen=new GameScreen();
     youWinScreenAppState = new YouWinScreen();
+    //youFailScreenAppState = new YouWinScreen();
     //Step 2 - init
     loadingPreMenuScreen.init(stateManager, this );
     mainScreenState.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
@@ -190,6 +193,9 @@ public class Main extends SimpleApplication  {
     //
     youWinScreenAppState.setEnabled(false);
     stateManager.attach(youWinScreenAppState);
+    //
+//    youFailScreenAppState.setEnabled(false);
+//    stateManager.attach(youFailScreenAppState);
    
      //Disable escape - otherwise intro is broken
     getInputManager().deleteMapping( SimpleApplication.INPUT_MAPPING_EXIT );
@@ -260,6 +266,21 @@ public void moveFromOptionsToOptionsLang( )
         mainScreenState.enableMusic();
         mainScreenState.setEnabled(true);
     }
+    
+//    public void moveFromGameToFail() {
+//        gameScreen.setEnabled(false);
+//        youFailScreenAppState.setEnabled(true);
+//    }
+//
+//    public void moveFromFailToMenu() {
+//        SaveHelper.delete();
+//        Main.saveObject = Main.startState;
+//        SaveHelper.save();
+//        SaveHelper.load();
+//        youFailScreenAppState.setEnabled(false);
+//        mainScreenState.enableMusic();
+//        mainScreenState.setEnabled(true);
+//    }
  
     
    
