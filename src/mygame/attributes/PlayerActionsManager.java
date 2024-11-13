@@ -139,6 +139,10 @@ public class PlayerActionsManager {
         return gameEnded;
     }
     
+    public void restartEndGame() {
+        gameEnded = false;
+    }
+    
     private void openDoor(Spatial targetItem) {
         // Step 1: Create a particle effect for the spark
         ParticleEmitter spark = new ParticleEmitter("SparkEmitter", ParticleMesh.Type.Triangle, 30);
@@ -184,7 +188,7 @@ public class PlayerActionsManager {
                 if (progress >= 1.0f) {
                     spatial.removeControl(this);
                     rootNode.detachChild(door);
-                    //gameEnded = true;
+                    gameEnded = true;
                 }
             }
 

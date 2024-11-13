@@ -32,7 +32,6 @@ import mygame.menu.settings.GameSettings;
 import mygame.menu.settings.SaveHelper;
 import mygame.menu.settings.SaveObject;
 import mygame.smp.player.SimpleMediaPlayer;
-import mygame.Project_Base;
  
   
  
@@ -54,6 +53,8 @@ public class Main extends SimpleApplication  {
   public static String i18n=I18N_ENGLAND;
   //
   public static SaveObject saveObject=new SaveObject();
+  
+  public static SaveObject startState;
 
   
   //Screens
@@ -64,8 +65,7 @@ public class Main extends SimpleApplication  {
   private MenuMainScreen mainScreenState;
   private TutorialScreen tutorialScreen;
   private GameScreen gameScreen;
-  private Project_Base projectBase;
-  private YouWinScreen youWinScreen;
+  private YouWinScreen youWinScreenAppState;
   
   //Audio
   MenuAudioEffectsHelper menuAudioEffectsHelper ;
@@ -78,6 +78,9 @@ public class Main extends SimpleApplication  {
   
         //load saved data
          SaveHelper.load();
+         
+         // Store the initial game state in startState
+         startState = new SaveObject();
          
         //Choose language
         selectLanguage(GameSettings.language);
@@ -145,7 +148,7 @@ public class Main extends SimpleApplication  {
     tutorialScreen=new TutorialScreen();
     loadingGameAppState= new  LoadingPreGameScreen();
     gameScreen=new GameScreen();
-    youWinScreen = new YouWinScreen();
+    youWinScreenAppState = new YouWinScreen();
     //Step 2 - init
     loadingPreMenuScreen.init(stateManager, this );
     mainScreenState.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
@@ -154,6 +157,7 @@ public class Main extends SimpleApplication  {
     tutorialScreen.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
     loadingGameAppState.init(stateManager, this  );
     gameScreen.init(stateManager,this, menuAudioEffectsHelper);
+    youWinScreenAppState.init(stateManager, this, musicHelper, menuAudioEffectsHelper);
             
     //Step 3 - add and enable/disable
     //INTRO READY - uncomment and change next line - loadingPreMenuScreen.setEnabled to false
@@ -169,8 +173,8 @@ public class Main extends SimpleApplication  {
     optionsAppState.setEnabled(false);
     stateManager.attach(optionsAppState);  
     //
-//    optionsLangAppState.setEnabled(false);
-//    stateManager.attach(optionsLangAppState); 
+    optionsLangAppState.setEnabled(false);
+    stateManager.attach(optionsLangAppState); 
      //
     mainScreenState.setEnabled(false);
     stateManager.attach(mainScreenState);
@@ -183,6 +187,9 @@ public class Main extends SimpleApplication  {
     //
     gameScreen.setEnabled(false);
     stateManager.attach(gameScreen);
+    //
+    youWinScreenAppState.setEnabled(false);
+    stateManager.attach(youWinScreenAppState);
    
      //Disable escape - otherwise intro is broken
     getInputManager().deleteMapping( SimpleApplication.INPUT_MAPPING_EXIT );
@@ -241,11 +248,15 @@ public void moveFromOptionsToOptionsLang( )
  
     public void moveFromGameToWin() {
         gameScreen.setEnabled(false);
-        youWinScreen.setEnabled(true);
+        youWinScreenAppState.setEnabled(true );
     }
 
     public void moveFromWinToMenu() {
-        youWinScreen.setEnabled(false);
+        SaveHelper.delete();
+        Main.saveObject = Main.startState;
+        SaveHelper.save();
+        SaveHelper.load();
+        youWinScreenAppState.setEnabled(false);
         mainScreenState.enableMusic();
         mainScreenState.setEnabled(true);
     }

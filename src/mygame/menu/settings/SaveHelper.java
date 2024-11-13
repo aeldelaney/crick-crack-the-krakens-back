@@ -47,13 +47,33 @@ public class SaveHelper {
          
          return saveObject;
   }
-    static public void delete( ) {
-    String userHome = System.getProperty("user.home");
-    BinaryExporter exporter = BinaryExporter.getInstance();
-    File file = new File(userHome+"/CraftElements/"+"save.j3o");
-     file.delete();
-       
-  
-  }
+//    static public void delete( ) {
+//    String userHome = System.getProperty("user.home");
+//    BinaryExporter exporter = BinaryExporter.getInstance();
+//    File file = new File(userHome+"/MyGame/"+"save.j3o");
+//     file.delete();
+//       
+//  
+//  }
+   static public void delete() {
+        String userHome = System.getProperty("user.home");
+        BinaryExporter exporter = BinaryExporter.getInstance();
+        // Use the same directory as save() and load()
+        File file = new File(userHome + "/MyGame/" + "save.j3o");
+
+        // Check if the file exists before trying to delete
+        if (file.exists()) {
+            boolean deleted = file.delete();
+            if (deleted) {
+                System.out.println("Deleted saved file: " + file);
+                Main.saveObject = Main.startState;
+            } else {
+                System.out.println("Failed to delete saved file: " + file);
+            }
+        } else {
+            System.out.println("Save file does not exist: " + file);
+        }
+    }
+
     
 }

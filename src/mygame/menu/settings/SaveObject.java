@@ -9,14 +9,12 @@ import com.jme3.export.Savable;
  
  
 import java.io.IOException;
-/**
- *
- * @author xxx
- */
+
 public class SaveObject implements Savable {
     
          
     public static boolean initedI18N=false; 
+    
     
     @Override
     public void write(JmeExporter ex) throws IOException {
