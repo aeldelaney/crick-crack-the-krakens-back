@@ -22,6 +22,7 @@ public class SceneManager {
     private RigidBodyControl scenePhy;
     private Spatial doorSpatial;
     private Spatial keypadSpatial;
+    private Spatial keycardSpatial;
 
     public SceneManager(BulletAppState bulletAppState, Node rootNode, AssetManager assetManager) {
         this.bulletAppState = bulletAppState;
@@ -37,8 +38,17 @@ public class SceneManager {
         bulletAppState.getPhysicsSpace().add(sceneNode);
         rootNode.attachChild(sceneNode);
         
-        createBox("Item1", new Vector3f(2, 4, -10), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Yellow, true);
-        //createBox("card_swiper", new Vector3f(15f, 4, 0), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Green, false);
+        //createBox("key_card", new Vector3f(-10, 4, -13), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Yellow, true);
+        keycardSpatial = assetManager.loadModel("Models/keypad/keypad.j3o");
+        keycardSpatial.setName("key_card");
+        keycardSpatial.setLocalTranslation(new Vector3f(-8f, 2f, -13));
+        keycardSpatial.setLocalScale(.2f, .2f, .1f); // x, y, z
+        keycardSpatial.rotate(FastMath.HALF_PI, 0, 0);
+        keycardSpatial.setUserData("canBePickedUp", true);
+        PhysicsHandler.addPhysics(keycardSpatial, false, bulletAppState);
+        rootNode.attachChild(keycardSpatial);
+        
+        //createBox("key_card", new Vector3f(2, 4, -10), new Vector3f(0.3f, 0.3f, 0.3f), ColorRGBA.Yellow, true);
         keypadSpatial = assetManager.loadModel("Models/keypad/keypad.j3o");
         keypadSpatial.setName("card_swiper");
         keypadSpatial.setLocalTranslation(new Vector3f(16, 4, 0));

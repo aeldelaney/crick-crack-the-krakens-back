@@ -26,7 +26,8 @@ public class PlayerManager {
 
     // Set up yhe player
     public void setupPlayer() {
-        CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(1.25f, 2f, 1);
+//        CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(1.25f, 2f, 1);
+        CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(1.25f, 3f, 1);
         player = new CharacterControl(capsuleShape, 0.05f);
 
         player.getCollisionShape().setMargin(0.01f);
@@ -34,7 +35,7 @@ public class PlayerManager {
         playerNode = new Node("Player");
         playerNode.addControl(player);
 
-        player.setPhysicsLocation(new Vector3f(0, 2, 0));
+        player.setPhysicsLocation(new Vector3f(0, 3, 0));
         playerNode.setLocalTranslation(new Vector3f(7, 0, -2));
         player.setJumpSpeed(20);
         player.setFallSpeed(30);
