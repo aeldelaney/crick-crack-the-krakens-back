@@ -496,9 +496,9 @@ public static void selectLanguage(int language)
          //Color to use if above pictures are not provided.
          ColorRGBA screenColor=ColorRGBA.Black;
          //Video to play. Must not be null
-         String videoAssetPath="Media/320_180.mjpg";
+        String videoAssetPath="Media/trailer.mjpeg.avi";
          //Audio to play. Null if no audio
-         String audioAssetPath="Media/audio.ogg";
+        String audioAssetPath="Media/trailer.ogg";
          //Source FPS. Should be consistent with original FPS. In most cases 25 or 30
          int framesPerSec=30;
          //Playback mode. Play once or loop
