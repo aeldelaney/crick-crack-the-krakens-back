@@ -205,7 +205,7 @@ public class TutorialScreen extends BaseAppState implements RawInputListener,  A
       
         //MENU
        //BACKGROUND
-        bgImage=declareImage(this.viewPort.getCamera().getWidth(), this.viewPort.getCamera().getHeight(), 0 , this.viewPort.getCamera().getHeight(),Vars.ASSET_IMAGE_BG);
+        bgImage=declareImage(this.viewPort.getCamera().getWidth(), this.viewPort.getCamera().getHeight(), 0 , this.viewPort.getCamera().getHeight(),Vars.ASSET_IMAGE_BLANK_BG);
        
         
         //Tut 1

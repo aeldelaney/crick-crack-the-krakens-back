@@ -5,6 +5,7 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import mygame.*;
 import com.jme3.math.Ray;
@@ -14,6 +15,7 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
 import com.jme3.scene.shape.Box;
 import java.util.Random;
@@ -27,6 +29,7 @@ public class EnemyChaserControl extends AbstractControl {
     private static Box mesh = new Box(0.25f, 0.25f, 0.25f);
     private AssetManager assetManager;
     private BulletAppState bulletAppState;
+     private Spatial enemy;
     
     // Declare the wander direction and timer variables
     private Vector3f wanderDirection = Vector3f.ZERO; // Default to no movement
@@ -43,15 +46,28 @@ public class EnemyChaserControl extends AbstractControl {
         
     public void setupEnemy() {
         // Aggro Cube
-        aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
-        aggroCube.addControl(new EnemyChaserControl(cam, rootNode, assetManager, bulletAppState));
-        rootNode.attachChild(aggroCube);
-        bulletAppState.getPhysicsSpace().add(aggroCube);
-        bulletAppState.setDebugEnabled(true);
+        //aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
+        //aggroCube.addControl(new EnemyChaserControl(cam, rootNode, assetManager, bulletAppState));
+        //rootNode.attachChild(aggroCube);
+        //bulletAppState.getPhysicsSpace().add(aggroCube);
+        //bulletAppState.setDebugEnabled(true);
+        
+        
+        enemy = assetManager.loadModel("Models/enemy/enemy.j3o");
+        enemy.setName("enemy");
+        enemy.setLocalTranslation(new Vector3f(12, 0.5f, 9));
+        enemy.setLocalScale(3f, 3f, 3f); // x, y, z
+        //enemy.rotate(FastMath.HALF_PI, 0, 0);
+        //enemy.setUserData("canBePickedUp", false);
+        //PhysicsHandler.addPhysics(enemy, false, bulletAppState);
+        bulletAppState.getPhysicsSpace().add(enemy);
+        rootNode.attachChild(enemy);
+        
         
         // Create and attach RigidBodyControl
         physicsControl = new RigidBodyControl(1.0f);  // Set mass to 1 for the cube
-        aggroCube.addControl(physicsControl);
+        //aggroCube.addControl(physicsControl);
+        enemy.addControl(physicsControl);
         bulletAppState.getPhysicsSpace().add(physicsControl);
     }
 
@@ -59,8 +75,10 @@ public class EnemyChaserControl extends AbstractControl {
     protected void controlUpdate(float tpf) {
         
         if (physicsControl == null) {
+            System.out.println("still null");
             return;  // Early return if the physics control is not yet initialized
         }
+        System.out.println("no longer null");
         
         // Set the wandering speed and random movement timer
         float wanderSpeed = 10f;  // Adjust speed as needed
@@ -113,12 +131,12 @@ public class EnemyChaserControl extends AbstractControl {
         // No rendering logic needed
     }
         
-    public Geometry myBox(String name, Vector3f loc, ColorRGBA color) {
-        Geometry geom = new Geometry(name, mesh);
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", color);
-        geom.setMaterial(mat);
-        geom.setLocalTranslation(loc);
-        return geom;
-    }
+//    public Geometry myBox(String name, Vector3f loc, ColorRGBA color) {
+//        Geometry geom = new Geometry(name, mesh);
+//        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+//        mat.setColor("Color", color);
+//        geom.setMaterial(mat);
+//        geom.setLocalTranslation(loc);
+//        return geom;
+//    }
 }
