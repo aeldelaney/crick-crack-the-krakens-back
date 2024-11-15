@@ -257,7 +257,7 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
         int yPosButton = (int)(screenHeight / 2 - buttonHeight / 2);  // Position it towards the top
 
         // Create the Cancel button
-        optionCancelLabel = declareButton(fontSize, buttonWidth, buttonHeight, "OptionReturnToMainMenu", xPosButton, yPosButton);
+        optionCancelLabel = declareButton(fontSize, buttonWidth, buttonHeight, "MainMenuButtonQuit", xPosButton, yPosButton);
 
         // Create the congratulatory label (below the button)
         Label congratulatoryLabel = new Label("Congratulations! You Have Escaped...");
@@ -369,11 +369,11 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
  
  void attachInput()
     {
-        inputManager.addMapping("UP", up_trigger);
+     inputManager.addMapping("UP", up_trigger);
      inputManager.addListener(this, new String[]{"UP"});
      inputManager.addMapping("DOWN", down_trigger);
      inputManager.addListener(this, new String[]{"DOWN"});
-      inputManager.addMapping("LEFT", left_trigger);
+     inputManager.addMapping("LEFT", left_trigger);
      inputManager.addListener(this, new String[]{"LEFT"});
      inputManager.addMapping("RIGHT",right_trigger);
      inputManager.addListener(this, new String[]{"RIGHT"});
@@ -396,7 +396,7 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
     }
   void dettachInput()
     {
-          inputManager.removeListener(this);
+         inputManager.removeListener(this);
          inputManager.deleteMapping("UP");
          inputManager.deleteMapping("DOWN");
          inputManager.deleteMapping("LEFT");
@@ -404,8 +404,8 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
          inputManager.deleteMapping("SPACE");
          inputManager.deleteMapping("ENTER");
          inputManager.deleteMapping("ESC");
-          inputManager.removeRawInputListener( joystickEventListener );
-          inputManager.removeRawInputListener(this);
+         inputManager.removeRawInputListener( joystickEventListener );
+         inputManager.removeRawInputListener(this);
          for(int a=0;a<buttonTab.size();a++)
             buttonTab.get(a).removeMouseListener(this); 
     }
@@ -435,40 +435,6 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
              
         if(evt.isPressed()) 
            return;
-
-//        for(Rectangle key: pickPlayer.keySet())
-//           {
-//               //
-//              if(key.contains(evt.getX() ,evt.getY()))
-//                {
-//                    SimpleMediaPlayer mediaPlayer= pickPlayer.get(key);
-//
-//                    //Pause the rest if playing
-//                     for(Rectangle key2: pickPlayer.keySet())
-//                        {
-//                         SimpleMediaPlayer mediaPlayer2= pickPlayer.get(key2);
-//                        //skip the chosen one
-//                         if(mediaPlayer.getScreenName().equals(mediaPlayer2.getScreenName()))
-//                             continue;
-//                         //Pause the rest  
-//                         if( mediaPlayer2.isPlaying())
-//                             mediaPlayer2.pauseMedia();
-//                        }
-//
-//
-//                       //enable    
-//                       if(mediaPlayer.isPaused())
-//                           mediaPlayer.unpauseMedia();
-//                       else   if(!mediaPlayer.isLoaded())
-//                          mediaPlayer.loadAndPlayMedia();
-//                        else   if( mediaPlayer.isPlaying())
-//                          mediaPlayer.pauseMedia();
-//
-//
-//                    return;
-//                }
-//         // System.out.println("Click "+evt.getX()+" "+evt.getY()+" "+ key.contains( evt.getX() ,evt.getY() ));
-//          }
       }
 
     @Override
@@ -485,11 +451,6 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
   */ 
  private void rollUp()
     {
-//      selectedOption--;
-//      if(selectedOption<0) 
-//        selectedOption=buttonTab.size()-1;    
-//     //Select option
-//     GuiGlobals.getInstance().requestFocus( buttonTab.get(selectedOption));  
     }
  
  /**
@@ -497,11 +458,6 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
   */ 
  private void rollDown()
     {
-//      selectedOption++;
-//      if(selectedOption>=buttonTab.size()) 
-//        selectedOption=0;
-//     //Select option
-//     GuiGlobals.getInstance().requestFocus( buttonTab.get(selectedOption));
     }
     
     @Override
@@ -515,23 +471,6 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
               cancel();
              return;
          }
-//     else  if (name.equals("UP"))  
-//         {
-//            //sound
-//            menuAudioEffectsHelper.playOptionSwitch();
-//            rollUp();   
-//          }
-//      else  if (name.equals("DOWN"))  
-//         {
-//           //sound
-//          menuAudioEffectsHelper.playOptionSwitch();
-//          rollDown();  
-//          }
-//        else  if(name.equals("ENTER") || name.equals("SPACE") )
-//         {
-//            handleEnter();
-//         }
-    
     }
 
  
@@ -540,15 +479,7 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
     
        if(mbe.isPressed())
            return;
-        
-//      //Search for clicked
-//      if(buttonTab.contains(sptl))
-//         {
-//          selectedOption=buttonTab.indexOf(sptl);
-//          }
-//      //sound
-//      menuAudioEffectsHelper.playOptionSwitch();
-      //action
+
       handleEnter();
     }
 
@@ -556,7 +487,6 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
    @Override
     public void mouseEntered(MouseMotionEvent mme, Spatial sptl, Spatial sptl1) {
       //
-      //menuAudioEffectsHelper.playOptionSwitch();
     }
 
 
@@ -577,45 +507,13 @@ public class YouWinScreen extends BaseAppState implements RawInputListener,  Act
   */
  private void handleEnter()
      {
-        //sound
-//         menuAudioEffectsHelper.playEnabled();
-//         
-//      if(selectedOption!=OPTION_CONFIG_CANCEL)  
-//         {
-//            SimpleMediaPlayer mediaPlayer= selectPlayer.get(selectedOption);
-//             //Pause the rest if playing
-//             for(SimpleMediaPlayer mediaPlayer2: selectPlayer )
-//                  {
-//                   //skip the chosen one
-//                   if(mediaPlayer.getScreenName().equals(mediaPlayer2.getScreenName()))
-//                       continue;
-//                   //Pause the rest  
-//                   if( mediaPlayer2.isPlaying())
-//                       mediaPlayer2.pauseMedia();
-//                  }
-//
-//                   //enable    
-//                    if(mediaPlayer.isPaused())
-//                        mediaPlayer.unpauseMedia();
-//                    else   if(!mediaPlayer.isLoaded())
-//                       mediaPlayer.loadAndPlayMedia();
-//                     else   if( mediaPlayer.isPlaying())
-//                       mediaPlayer.pauseMedia();
-//            }
-//      else
-//        {
-           cancel();
-//        }
+        cancel();
      }
  
  
    void cancel()
     {
-          //Stop all
-//          for(SimpleMediaPlayer mediaPlayer: selectPlayer )
-//             mediaPlayer.stopMedia();
-           //Return  
-           app.moveFromWinToMenu();
+        app.stop() ;
     }
    
    

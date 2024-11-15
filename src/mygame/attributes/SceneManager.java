@@ -38,11 +38,10 @@ public class SceneManager {
         bulletAppState.getPhysicsSpace().add(sceneNode);
         rootNode.attachChild(sceneNode);
         
-        keycardSpatial = assetManager.loadModel("Models/keypad/keypad.j3o");
+        keycardSpatial = assetManager.loadModel("Models/keycard/keycard.j3o");
         keycardSpatial.setName("key_card");
         keycardSpatial.setLocalTranslation(new Vector3f(-8f, 2f, -13));
-        keycardSpatial.setLocalScale(.2f, .2f, .1f); // x, y, z
-        keycardSpatial.rotate(FastMath.HALF_PI, 0, 0);
+        keycardSpatial.setLocalScale(.4f, .4f, .4f); // x, y, z
         keycardSpatial.setUserData("canBePickedUp", true);
         PhysicsHandler.addPhysics(keycardSpatial, false, bulletAppState);
         rootNode.attachChild(keycardSpatial);

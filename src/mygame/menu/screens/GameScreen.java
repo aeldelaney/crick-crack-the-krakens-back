@@ -128,7 +128,8 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
             this.app.getCamera(),
             this.app.getRootNode(),
             this.app.getAssetManager(),
-            bulletAppState
+            bulletAppState,
+            null
         );
         enemyChaserControl.setupEnemy();
 
@@ -182,12 +183,9 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         // Update the interaction manager
         interactionManager.update(tpf);
         
-        if (interactionManager.isWonGame()) {
+        if (interactionManager.isWonGame() == true) {
             interactionManager.restartWonGame();
             app.moveFromGameToWin();
-        } else if (interactionManager.isFailedGame()) {
-            interactionManager.restartFailedGame();
-            //app.moveFromGameToFail(); need to create
         }
     }
     

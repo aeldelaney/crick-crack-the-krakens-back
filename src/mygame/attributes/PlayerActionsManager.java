@@ -200,6 +200,7 @@ public class PlayerActionsManager {
                 }
                 if (elapsedTime >= 3.0f) {
                     gameWon = true;
+                    door.removeControl(this);
                 }
             }
 

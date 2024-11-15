@@ -66,7 +66,7 @@ public class SaveHelper {
             boolean deleted = file.delete();
             if (deleted) {
                 System.out.println("Deleted saved file: " + file);
-                Main.saveObject = Main.startState;
+                //Main.saveObject = Main.startState;
             } else {
                 System.out.println("Failed to delete saved file: " + file);
             }

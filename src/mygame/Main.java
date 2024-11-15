@@ -9,6 +9,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
+import com.simsilica.lemur.Button;
 import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.style.Attributes;
 import com.simsilica.lemur.style.BaseStyles;
@@ -67,7 +68,6 @@ public class Main extends SimpleApplication  {
   private TutorialScreen tutorialScreen;
   private GameScreen gameScreen;
   private YouWinScreen youWinScreenAppState;
-  //private YouFailScreen youFailScreenAppState;
   
   //Audio
   MenuAudioEffectsHelper menuAudioEffectsHelper ;
@@ -151,7 +151,7 @@ public class Main extends SimpleApplication  {
     loadingGameAppState= new  LoadingPreGameScreen();
     gameScreen=new GameScreen();
     youWinScreenAppState = new YouWinScreen();
-    //youFailScreenAppState = new YouWinScreen();
+    
     //Step 2 - init
     loadingPreMenuScreen.init(stateManager, this );
     mainScreenState.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
@@ -193,9 +193,6 @@ public class Main extends SimpleApplication  {
     //
     youWinScreenAppState.setEnabled(false);
     stateManager.attach(youWinScreenAppState);
-    //
-//    youFailScreenAppState.setEnabled(false);
-//    stateManager.attach(youFailScreenAppState);
    
      //Disable escape - otherwise intro is broken
     getInputManager().deleteMapping( SimpleApplication.INPUT_MAPPING_EXIT );
@@ -256,39 +253,13 @@ public void moveFromOptionsToOptionsLang( )
         gameScreen.setEnabled(false);
         youWinScreenAppState.setEnabled(true );
     }
-
-    public void moveFromWinToMenu() {
-        SaveHelper.delete();
-        Main.saveObject = Main.startState;
-        SaveHelper.save();
-        SaveHelper.load();
-        youWinScreenAppState.setEnabled(false);
-        mainScreenState.enableMusic();
-        mainScreenState.setEnabled(true);
-    }
-    
-//    public void moveFromGameToFail() {
-//        gameScreen.setEnabled(false);
-//        youFailScreenAppState.setEnabled(true);
-//    }
-//
-//    public void moveFromFailToMenu() {
-//        SaveHelper.delete();
-//        Main.saveObject = Main.startState;
-//        SaveHelper.save();
-//        SaveHelper.load();
-//        youFailScreenAppState.setEnabled(false);
-//        mainScreenState.enableMusic();
-//        mainScreenState.setEnabled(true);
-//    }
- 
-    
    
  public void  moveFromLoadGameToGame()
     {
         // enqueue(new Callable(){
       //  public Void call(){
             loadingGameAppState.setEnabled(false);
+              gameScreen.setEnabled(false);
             gameScreen.setEnabled(true);
        //   }
       //  });
@@ -305,11 +276,11 @@ public void moveFromOptionsToOptionsLang( )
  
  public void  moveFromMenuToLoadGame()
     { 
-       
         mainScreenState.disableMusic();
         mainScreenState.setEnabled(false );
         loadingGameAppState.loadData();
         loadingGameAppState.setEnabled(true);
+        gameScreen.setEnabled(true);
         return  ;
      }
  public void  moveFromLoadAppToMain()

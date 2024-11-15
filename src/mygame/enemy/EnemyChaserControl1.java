@@ -44,7 +44,7 @@ public class EnemyChaserControl1 extends AbstractControl {
         //aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
         aggroCube = myBox("Scared Cube", new Vector3f(13, 0.5f, 9), ColorRGBA.Red);
         //aggroCube = myBox("Scared Cube", new Vector3f(13, 4, 9), ColorRGBA.Red);
-        aggroCube.addControl(new EnemyChaserControl(cam, rootNode, assetManager, bulletAppState));
+        //aggroCube.addControl(new EnemyChaserControl(cam, rootNode, assetManager, bulletAppState));
         rootNode.attachChild(aggroCube);
         bulletAppState.getPhysicsSpace().add(aggroCube);
         bulletAppState.setDebugEnabled(true);

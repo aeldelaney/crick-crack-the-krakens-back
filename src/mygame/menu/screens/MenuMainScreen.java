@@ -32,6 +32,8 @@ import com.simsilica.lemur.VAlignment;
 import com.simsilica.lemur.component.QuadBackgroundComponent;
  import com.simsilica.lemur.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
  import mygame.Main;
 import mygame.menu.audio.MenuAudioEffectsHelper;
@@ -71,6 +73,8 @@ public class MenuMainScreen extends BaseAppState implements ActionListener, Mous
     Button settButt;
     Button quitButt;
     Button tutButt;
+    
+    private List<Button> allButtons;
        
     Node buttonNode=new Node();
     
@@ -141,6 +145,9 @@ public class MenuMainScreen extends BaseAppState implements ActionListener, Mous
         tutButt=declareButton(fontSize,   buttonWidth,   buttonHeight,"MainMenuButtonTutorial", buttonLeftMargin,(int)(settButt.getLocalTranslation().y-buttonHeight-buttonBetMargin) );
         //Quit
         quitButt=declareButton(fontSize,   buttonWidth,   buttonHeight,"MainMenuButtonQuit", buttonLeftMargin,(int)(tutButt.getLocalTranslation().y-buttonHeight-buttonBetMargin) );
+        
+        
+        allButtons = Arrays.asList(quitButt, tutButt, settButt, playButt);
         
         //Add buttons to gui
          localGuiNode.attachChild(buttonNode);
@@ -333,6 +340,16 @@ public class MenuMainScreen extends BaseAppState implements ActionListener, Mous
             handleEnter();
              
          }
+    }
+    
+    // Method to get the Quit button
+    public Button getQuitButton() {
+        return quitButt;
+    }
+
+    // Method to get all buttons
+    public List<Button> getAllButtons() {
+        return allButtons;
     }
 
     @Override
