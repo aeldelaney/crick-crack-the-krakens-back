@@ -47,6 +47,11 @@ public class PlayerActionsManager {
     private AudioNode correctSound;
     private boolean soundPlaying = false;
     private SimpleApplication app;
+    
+    private boolean isShaking = false;
+    private float shakeDuration = 0.5f;  // Duration of the shake
+    private float shakeIntensity = 0.1f; // Intensity of the shake
+    private float shakeTime = 0f;  // Timer for the shake
 
     // Manage what actions the player can perform
     public PlayerActionsManager(SimpleApplication app, PhysicsSpace physicsSpace, AssetManager assetManager, SceneManager sceneManager) {
@@ -106,7 +111,16 @@ public class PlayerActionsManager {
     // Method to play the sound once
         public void playCorrectSound() {
             correctSound.play();     // Play the sound
+            
+            // Start the camera shake
+            startCameraShake();
         }
+        
+    // Method to start camera shake
+    private void startCameraShake() {
+        isShaking = true;
+        shakeTime = 0f;  // Reset shake timer
+    }
 
     private void dropItem() {
         if (heldItem != null) {
@@ -249,6 +263,28 @@ public class PlayerActionsManager {
         
         if (sceneManager != null) {
         sceneManager.updateSoundVolume(cam);  // Adjust the sound volume based on distance
-    }
+        }
+        
+        if (isShaking) {
+            // Calculate a random offset for the shake
+            float offsetX = FastMath.rand.nextFloat() * shakeIntensity * 2 - shakeIntensity;
+            float offsetY = FastMath.rand.nextFloat() * shakeIntensity * 2 - shakeIntensity;
+            float offsetZ = FastMath.rand.nextFloat() * shakeIntensity * 2 - shakeIntensity;
+
+            // Apply the shake to the camera
+            Vector3f originalPosition = app.getCamera().getLocation();
+            Vector3f shakePosition = originalPosition.add(offsetX, offsetY, offsetZ);
+            app.getCamera().setLocation(shakePosition);
+
+            // Increase the shake timer
+            shakeTime += tpf;
+
+            // Stop shaking after the duration has passed
+            if (shakeTime >= shakeDuration) {
+                isShaking = false;
+                // Optionally reset the camera position to its original position
+                app.getCamera().setLocation(originalPosition);
+            }
+        }
     }
 }
