@@ -2,6 +2,8 @@ package mygame.attributes;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.input.InputManager;
 import com.jme3.input.MouseInput;
@@ -24,6 +26,7 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial.CullHint;
 import com.jme3.scene.control.AbstractControl;
+import com.jme3.system.Timer;
 import mygame.menu.screens.GameScreen;
 
 public class PlayerActionsManager {
@@ -40,6 +43,10 @@ public class PlayerActionsManager {
     private boolean gameWon = false;
     private boolean gameFailed = false;
     private SceneManager sceneManager;
+    // Add fields for the sound
+    private AudioNode correctSound;
+    private boolean soundPlaying = false;
+    private SimpleApplication app;
 
     // Manage what actions the player can perform
     public PlayerActionsManager(SimpleApplication app, PhysicsSpace physicsSpace, AssetManager assetManager, SceneManager sceneManager) {
@@ -49,9 +56,15 @@ public class PlayerActionsManager {
         this.physicsSpace = physicsSpace;
         this.assetManager = assetManager;
         this.sceneManager = sceneManager;
+        this.app = app;
 
         handNode = new Node("HandNode");
         app.getRootNode().attachChild(handNode);
+        
+        // Load the sound
+        correctSound = new AudioNode(assetManager, "Sounds/Menu/Music/doorOpening.wav", AudioData.DataType.Stream);
+        correctSound.setLooping(false); // Ensure the sound doesn't loop
+        correctSound.setVolume(1f); // Set volume to 100%
     }
 
     private void pickUpItem() {
@@ -89,6 +102,11 @@ public class PlayerActionsManager {
             }
         }
     }
+    
+    // Method to play the sound once
+        public void playCorrectSound() {
+            correctSound.play();     // Play the sound
+        }
 
     private void dropItem() {
         if (heldItem != null) {
@@ -126,6 +144,9 @@ public class PlayerActionsManager {
                 float interactionRange = 2.0f; // Define your desired range here
 
                 if (distance <= interactionRange) {
+                    // Play the sound when the interaction is correct
+                    playCorrectSound();
+                    
                     // Make the item disappear and add particles similar to a shortcircuit
                     rootNode.detachChild(heldItem);
                     openDoor(targetItem); // Replace with funciton for keypad

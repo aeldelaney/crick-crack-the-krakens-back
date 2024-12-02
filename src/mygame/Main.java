@@ -260,6 +260,7 @@ public void moveFromOptionsToOptionsLang( )
  }
  
     public void moveFromGameToWin() {
+        gameScreen.disableMusic();
         gameScreen.setEnabled(false);
         youWinScreenAppState.setEnabled(true );
     }
