@@ -42,6 +42,8 @@ import mygame.attributes.SceneManager;
 import mygame.attributes.CamManager;
 import mygame.attributes.LightingManager;
 import mygame.enemy.EnemyChaserControl;
+import mygame.menu.audio.MusicHelper;
+import mygame.menu.audio.MusicHelperGame;
 
 public class GameScreen extends AbstractAppState implements ActionListener, PauseOverlay.PauseListener {
     
@@ -71,9 +73,14 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
     FilterPostProcessor fpp;
     PauseOverlay pauseOverlay;
     //Audio
-    MenuAudioEffectsHelper menuAudioEffectsHelper ;
+    MenuAudioEffectsHelper menuAudioEffectsHelper;
+    MusicHelperGame musicHelper;
+    
+    //Enable music
+   boolean isMusicInited=false;
+    
     JoystickEventListener joystickEventListener;
-    public void init(AppStateManager stateManager, Application app, MenuAudioEffectsHelper menuAudioEffectsHelper ) {
+    public void init(AppStateManager stateManager, Application app, MenuAudioEffectsHelper menuAudioEffectsHelper, MusicHelperGame musicHelper ) {
         super.initialize(stateManager, app);  
         
         this.app = (Main) app;
@@ -83,6 +90,7 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         this.assetManager = this.app.getAssetManager();
         this.inputManager=this.app.getInputManager();
         this.menuAudioEffectsHelper=menuAudioEffectsHelper;
+        this.musicHelper=musicHelper;
         
         
         this.rootNode = this.app.getRootNode();
@@ -218,7 +226,25 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         // Called when the state is detached from the state manager
     }
     
-    
+    @Override
+   public void postRender()
+    {
+        //Trigger only once
+        if(!isMusicInited)
+        {
+            musicHelper.playGame();
+            isMusicInited=true;
+        }
+    }
+    public void enableMusic()
+      {
+          isMusicInited=false;
+      }
+    public void disableMusic()
+      {
+       musicHelper.stopGame();
+      }
+
     
     
 

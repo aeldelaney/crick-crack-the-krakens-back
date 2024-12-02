@@ -21,6 +21,7 @@ import java.util.Locale;
  import javax.imageio.ImageIO;
 import mygame.menu.audio.MenuAudioEffectsHelper;
 import mygame.menu.audio.MusicHelper;
+import mygame.menu.audio.MusicHelperGame;
 import mygame.menu.screens.LoadingPreMenuScreen;
 import mygame.menu.screens.LoadingPreGameScreen;
 import mygame.menu.screens.GameScreen;
@@ -72,6 +73,9 @@ public class Main extends SimpleApplication  {
   //Audio
   MenuAudioEffectsHelper menuAudioEffectsHelper ;
   MusicHelper musicHelper;
+  
+  MenuAudioEffectsHelper menuAudioEffectsHelperGame;
+  MusicHelperGame musicHelperGame;
   /** Start the jMonkeyEngine application */
   public static void main(String[] args) {
      
@@ -135,11 +139,17 @@ public class Main extends SimpleApplication  {
 
 
     //////////////////////AUDIO//////
-    menuAudioEffectsHelper=new MenuAudioEffectsHelper(assetManager);
+    menuAudioEffectsHelper = new MenuAudioEffectsHelper(assetManager);
     musicHelper=new MusicHelper(assetManager);
     //init
     musicHelper.initMainMenuAudio();
     menuAudioEffectsHelper.initAudio();
+    
+    menuAudioEffectsHelperGame = new MenuAudioEffectsHelper(assetManager);
+    musicHelperGame = new MusicHelperGame(assetManager);
+    //init
+    musicHelperGame.initGameAudio();
+    menuAudioEffectsHelperGame.initAudio();
     
     ////////////////SCREENS/STATES///////////   
     //Step 1 - declare
@@ -159,7 +169,7 @@ public class Main extends SimpleApplication  {
     optionsLangAppState.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
     tutorialScreen.init(stateManager, this,musicHelper,menuAudioEffectsHelper);
     loadingGameAppState.init(stateManager, this  );
-    gameScreen.init(stateManager,this, menuAudioEffectsHelper);
+    gameScreen.init(stateManager,this, menuAudioEffectsHelperGame, musicHelperGame);
     youWinScreenAppState.init(stateManager, this, musicHelper, menuAudioEffectsHelper);
             
     //Step 3 - add and enable/disable
@@ -259,8 +269,10 @@ public void moveFromOptionsToOptionsLang( )
         // enqueue(new Callable(){
       //  public Void call(){
             loadingGameAppState.setEnabled(false);
-              gameScreen.setEnabled(false);
+            //gameScreen.setEnabled(false);
             gameScreen.setEnabled(true);
+            
+            gameScreen.enableMusic();
        //   }
       //  });
      //
