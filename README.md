@@ -165,3 +165,20 @@ One particular aspect we like about this game are the quick time events (QTEs). 
   - In the main.java file, the gui for the main menu was added. The menu includes music, a placeholder for the trailer, sound control, tutorial placeholders, and more. The main menu runs separately from the program and when pressing "play" runs a simple cube application. If you press "esc", it brings up a miniature menu. This is due to the need to reformat project_base.java from simpleApplication to appBase classes which, considering my time constrictions and solo work on the project, was hard to fit into the alloted time space. To run main.java without error, the groovy-all.jar file from the top level of the directory needs to be manually imported into libraries as it is outdated and can barely be found online, much less directly downloaded by the system. The menu boasts a nice UI representative of the mood of the game along with some music running in the back for more atmosphere.
  ![image](https://github.com/user-attachments/assets/61731c85-5b11-4375-8aa0-622e38dea687)
 
+  ### Final Deliverable
+  - I added a trailer to the beginning of the game instead of a placeholder for increased immersion and overall presentation of the game.
+  - There is now a dancing lab resident on the side that cheers on the user when they attempt to escape from the laboratory. There is a mini objective in place where the user has to find the keycard to swipe the   cardreader at the door and open it to successfully finish the game.
+  ![image](https://github.com/user-attachments/assets/1d30c74b-13c5-4ae5-9af6-b2a4a856cb55)
+
+  - The keycard has physics just like everything in the world. Thus, if the player clicks to drop the keycard before reaching the cardswiper, it will fall to the floor with a small bounce and lay on the floor until the player decides to pick it back up again. While carrying the keycard, it will appear in front of the player's view so that the player knows it is still carrying the object.
+  ![image](https://github.com/user-attachments/assets/41d231b2-443c-4238-b207-82c2f69d0958)
+  ![image](https://github.com/user-attachments/assets/198219ae-39f0-47bf-8a65-5d6f8c3c8455)
+  ![image](https://github.com/user-attachments/assets/990cd9d7-ad54-48e5-849e-fd67f5fe8ad9)
+  - There have been additional textures added, specifically on the keycard, cardreader, door, and npc. The npc is fully rigged and animated, performing one of his animations in a loop while the player investigates the laboratory.
+  - The code was modularized compared to previous deliverables, where it is now broken up into many more compact classes that each have a specific purpose. This increases readability and efficiency of the code, as well as making it more compatible with large-scale changes or alterations.
+  - Once the keycard has been inserted, there is a small "short-circuit" spike using particles that pops up, and then the door slides open. Afterwards, the screen transforms into a congratulatory message that tells the user that they successfully escaped.
+  ![image](https://github.com/user-attachments/assets/9fdcd20b-2206-4f4e-ab5a-101d29b97af6)
+  ![image](https://github.com/user-attachments/assets/c73b8311-54f0-4397-b06a-7036ed925afe)
+
+
+
