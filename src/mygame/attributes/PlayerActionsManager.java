@@ -39,14 +39,16 @@ public class PlayerActionsManager {
     private AssetManager assetManager;
     private boolean gameWon = false;
     private boolean gameFailed = false;
+    private SceneManager sceneManager;
 
     // Manage what actions the player can perform
-    public PlayerActionsManager(SimpleApplication app, PhysicsSpace physicsSpace, AssetManager assetManager) {
+    public PlayerActionsManager(SimpleApplication app, PhysicsSpace physicsSpace, AssetManager assetManager, SceneManager sceneManager) {
         this.inputManager = app.getInputManager();
         this.cam = app.getCamera();
         this.rootNode = app.getRootNode();
         this.physicsSpace = physicsSpace;
         this.assetManager = assetManager;
+        this.sceneManager = sceneManager;
 
         handNode = new Node("HandNode");
         app.getRootNode().attachChild(handNode);
@@ -223,5 +225,9 @@ public class PlayerActionsManager {
     public void update(float tpf) {
         handNode.setLocalTranslation(cam.getLocation().add(cam.getDirection().mult(2f)));
         handNode.setLocalRotation(cam.getRotation());
+        
+        if (sceneManager != null) {
+        sceneManager.updateSoundVolume(cam);  // Adjust the sound volume based on distance
+    }
     }
 }

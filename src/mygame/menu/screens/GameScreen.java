@@ -149,7 +149,8 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
         interactionManager = new PlayerActionsManager(
             this.app,
             bulletAppState.getPhysicsSpace(),
-            this.app.getAssetManager()
+            this.app.getAssetManager(),
+            sceneManager
         );
 
         // Initialize the input handler
@@ -230,10 +231,11 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
    public void postRender()
     {
         //Trigger only once
-        if(!isMusicInited)
+        if(isEnabled() && !isMusicInited)
         {
             musicHelper.playGame();
             isMusicInited=true;
+            sceneManager.playPositionalMusic();
         }
     }
     public void enableMusic()
@@ -243,6 +245,7 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
     public void disableMusic()
       {
        musicHelper.stopGame();
+       sceneManager.stopPositionalMusic();
       }
 
     

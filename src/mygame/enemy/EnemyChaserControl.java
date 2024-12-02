@@ -24,6 +24,8 @@ import java.util.Random;
 import mygame.attributes.PhysicsHandler;
 import com.jme3.animation.Animation;
 import com.jme3.animation.LoopMode;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 
 public class EnemyChaserControl extends AbstractControl {
     private Ray ray = new Ray();
@@ -71,11 +73,11 @@ public class EnemyChaserControl extends AbstractControl {
         //enemy.setUserData("canBePickedUp", false);
         //PhysicsHandler.addPhysics(enemy, false, bulletAppState);
         bulletAppState.getPhysicsSpace().add(enemy);
-        rootNode.attachChild(enemy);
+        rootNode.attachChild(enemy); 
         
         
         // Create and attach RigidBodyControl
-//        physicsControl = new RigidBodyControl(1.0f);  // Set mass to 1 for the cube
+        physicsControl = new RigidBodyControl(1.0f);  // Set mass to 1 for the cube
 //        //aggroCube.addControl(physicsControl);
 //        enemy.addControl(new EnemyChaserControl(cam, rootNode, assetManager, bulletAppState,physicsControl));
 //        enemy.addControl(physicsControl);
@@ -135,7 +137,7 @@ public class EnemyChaserControl extends AbstractControl {
     @Override
     protected void controlUpdate(float tpf) {
         
-        if (physicsControl == null) {
+        if (physicsControl == null || enemy == null) {
             return;  // Early return if the physics control is not yet initialized
         }
 //        
