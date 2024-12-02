@@ -17,11 +17,13 @@ public class PlayerManager {
     private Camera cam;
     private InputManager inputManager;
     private float playerMoveSpeed = 0.1f;
+    private CamManager camManager; // Reference to CamManager
 
-    public PlayerManager(BulletAppState bulletAppState, Node rootNode, Camera cam, InputManager inputManager, AppSettings settings) {
+    public PlayerManager(BulletAppState bulletAppState, Node rootNode, Camera cam, InputManager inputManager, AppSettings settings, CamManager camManager) {
         this.bulletAppState = bulletAppState;
         this.cam = cam;
         this.inputManager = inputManager;
+        this.camManager = camManager;
     }
 
     // Set up yhe player
@@ -69,5 +71,18 @@ public class PlayerManager {
 
         player.setWalkDirection(walkDirection);
         player.setViewDirection(camDir);
+        
+        updateDepthOfField();
+    }
+    
+    // Update the depth of field when player moves
+    private void updateDepthOfField() {
+        if (player.getWalkDirection().length() > 0) {
+            // When moving, adjust depth of field parameters for a dynamic effect
+            camManager.updateDepthOfField(10.0f, 5.0f, 1.0f);
+        } else {
+            // When idle, reset depth of field to default values
+            camManager.updateDepthOfField(30.0f, 10.0f, 0.5f);
+        }
     }
 }

@@ -111,7 +111,8 @@ public class GameScreen extends AbstractAppState implements ActionListener, Paus
             this.app.getRootNode(),
             this.app.getCamera(),
             this.app.getInputManager(),
-            this.app.getContext().getSettings()
+            this.app.getContext().getSettings(),
+            cameraManager
         );
 
         // Initialize the scene
