@@ -179,6 +179,16 @@ One particular aspect we like about this game are the quick time events (QTEs). 
   - Once the keycard has been inserted, there is a small "short-circuit" spike using particles that pops up, and then the door slides open. Afterwards, the screen transforms into a congratulatory message that tells the user that they successfully escaped.
   ![image](https://github.com/user-attachments/assets/9fdcd20b-2206-4f4e-ab5a-101d29b97af6)
   ![image](https://github.com/user-attachments/assets/c73b8311-54f0-4397-b06a-7036ed925afe)
-
-
-
+  - The 6 effects include:
+      - Particles: the particles that appear when the keycard is inserted
+      - Bloom Filter: occurs when the player moves around the room
+      - Skybox: can be seen outside as it represents the ocean around the base
+      - Camera Shake: once the keycard is inserted, the camera shakes
+      - Main Menu: there is an interactable main menu that the user can navigate through
+      - Trailer: there is a trailer to connect the game together
+      - Options Menu: there is an interactable options menu for the user to click around that has working sound
+      - Tutorial Menu: there is a trailer menu for the user to watch the videos which can be paused and resumed at will with sound
+      - Sound Adjustment and saving: sound can be adjusted and saved for the game throughout its gameplay
+      - Win Screen: the win screen appears when the user has finished the game
+   - For sound, there is ambient music play in the background for both the menu and the game. In the menu, every click is accompanied by a specific sound to make it more interactive. In the game, the underwater npc sings a song that gets louder as the user approaches via positional sound. Once the keycard is inserted, a sound of the door opening starts playing via interactive sound.
+   - The game is fully playable with the goal being for the user to pick up the keycard and insert it into the cardreader to escape from the room.
