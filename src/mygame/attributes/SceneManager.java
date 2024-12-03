@@ -1,5 +1,6 @@
 package mygame.attributes;
 
+import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
@@ -8,7 +9,10 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
+import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.ssao.SSAOFilter;
 import com.jme3.renderer.Camera;
+import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -27,6 +31,9 @@ public class SceneManager {
     private Spatial keycardSpatial;
     private boolean isPositionalMusicPlaying = false;
     
+    private FilterPostProcessor fpp;
+    private SSAOFilter ssaoFilter;
+    
     // Add the AudioNode for positional sound
     private AudioNode soundNode;
 
@@ -34,6 +41,7 @@ public class SceneManager {
         this.bulletAppState = bulletAppState;
         this.rootNode = rootNode;
         this.assetManager = assetManager;
+        fpp = new FilterPostProcessor(assetManager);
     }
 
     // Set up the scene
@@ -89,14 +97,14 @@ public class SceneManager {
         }
     }
     
-// Update the sound's volume based on the distance to the camera (player)
-    public void updateSoundVolume(Camera cam) {
+    // Update the sound's volume based on the distance to the camera (player)
+    public void updateSoundVolume(Camera camer) {
         if (soundNode != null) {
             //Spatial cube015 = ((Node)((Node)sceneNode.getChild("background")).getChild("Scene")).getChild("Cube.015");
             Spatial cube015 = ((Node)((Node)sceneNode.getChild("background")).getChild("Scene")).getChild("Cube.015");
             if (cube015 != null) {
                 // Calculate the distance between the camera (player) and the cube
-                float distance = cam.getLocation().distance(cube015.getWorldTranslation());
+                float distance = camer.getLocation().distance(cube015.getWorldTranslation());
 
                 // Map the distance to volume (you can adjust the min/max values)
                 float maxDistance = 25f;  // Max distance at which the sound will be silent
