@@ -198,4 +198,4 @@ One particular aspect we like about this game are the quick time events (QTEs). 
    - Blender Tutorial: https://www.youtube.com/watch?v=4haAdmHqGOw
    - Models: https://hub.jmonkeyengine.org/t/jaime-model-rigged/42804
    - Music: https://www.youtube.com/watch?v=ZnHmskwqCCQ, https://www.youtube.com/watch?v=rMfaX3wRnOU, https://www.youtube.com/watch?v=O2f4izuDe14&list=PLY4oAfouVgHI_DzPRn4ixYibkM03x-QIA
-   - Textures: https://www.pinterest.com/pin/276689970841144836/, https://stablediffusionweb.com/prompts/door-texture, https://www.cgtrader.com/3d-models/electronics/computer/scifi-keypad-and-key, https://     www.artstation.com/artwork/WKgeav
+   - Textures: https://www.pinterest.com/pin/276689970841144836/, https://stablediffusionweb.com/prompts/door-texture, https://www.cgtrader.com/3d-models/electronics/computer/scifi-keypad-and-key, https://    www.artstation.com/artwork/WKgeav
