@@ -192,3 +192,10 @@ One particular aspect we like about this game are the quick time events (QTEs). 
       - Win Screen: the win screen appears when the user has finished the game
    - For sound, there is ambient music play in the background for both the menu and the game. In the menu, every click is accompanied by a specific sound to make it more interactive. In the game, the underwater npc sings a song that gets louder as the user approaches via positional sound. Once the keycard is inserted, a sound of the door opening starts playing via interactive sound.
    - The game is fully playable with the goal being for the user to pick up the keycard and insert it into the cardreader to escape from the room.
+ ### Member Contributions
+   - Solo Project starring Emma Levitsky
+ ### Sources/Citations
+   - Blender Tutorial: https://www.youtube.com/watch?v=4haAdmHqGOw
+   - Models: https://hub.jmonkeyengine.org/t/jaime-model-rigged/42804
+   - Music: https://www.youtube.com/watch?v=ZnHmskwqCCQ, https://www.youtube.com/watch?v=rMfaX3wRnOU, https://www.youtube.com/watch?v=O2f4izuDe14&list=PLY4oAfouVgHI_DzPRn4ixYibkM03x-QIA
+   - Textures: https://www.pinterest.com/pin/276689970841144836/, https://stablediffusionweb.com/prompts/door-texture, https://www.cgtrader.com/3d-models/electronics/computer/scifi-keypad-and-key, https://     www.artstation.com/artwork/WKgeav
