@@ -199,3 +199,11 @@ One particular aspect we like about this game are the quick time events (QTEs). 
    - Models: https://hub.jmonkeyengine.org/t/jaime-model-rigged/42804
    - Music: https://www.youtube.com/watch?v=ZnHmskwqCCQ, https://www.youtube.com/watch?v=rMfaX3wRnOU, https://www.youtube.com/watch?v=O2f4izuDe14&list=PLY4oAfouVgHI_DzPRn4ixYibkM03x-QIA
    - Textures: https://www.pinterest.com/pin/276689970841144836/, https://stablediffusionweb.com/prompts/door-texture, https://www.cgtrader.com/3d-models/electronics/computer/scifi-keypad-and-key, https://www.artstation.com/artwork/WKgeav
+### Demo
+  - TODO
+### Download
+  - A
+### Future Work
+  - Adding a moving enemy that will wander around until the user steps close enough after which he will chase the user and cause the game to end if the user fails to run away in time
+  - Adding more rooms and puzzles for the user to solve so that they are able to learn more about why they ended up in the room and the plot behind the monster in the laboratory
+  - Adding a Kraken to the outside of the laboratory that will slowly break the facility if the user uses their flashlight too much
