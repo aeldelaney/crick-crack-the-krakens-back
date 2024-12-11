@@ -8,7 +8,7 @@ build/
 nbbuild/
 nbdist/
 .nb-gradle/
-
+dist/
 
 # Pulled from a gradle template
 /.gradle/
