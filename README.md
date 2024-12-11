@@ -202,7 +202,8 @@ One particular aspect we like about this game are the quick time events (QTEs). 
 ### Demo
   - TODO
 ### Download
-  - A
+  - The dist.zip file was too heavy for github so I have provided a link below
+  - https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/elevits2_jh_edu/EY1updMqj55GqdMBm-t-VLEBwohjjCeyAXmnmiM9SzZEdw?e=0aCf45
 ### Future Work
   - Adding a moving enemy that will wander around until the user steps close enough after which he will chase the user and cause the game to end if the user fails to run away in time
   - Adding more rooms and puzzles for the user to solve so that they are able to learn more about why they ended up in the room and the plot behind the monster in the laboratory
