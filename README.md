@@ -200,7 +200,7 @@ One particular aspect we like about this game are the quick time events (QTEs). 
    - Music: https://www.youtube.com/watch?v=ZnHmskwqCCQ, https://www.youtube.com/watch?v=rMfaX3wRnOU, https://www.youtube.com/watch?v=O2f4izuDe14&list=PLY4oAfouVgHI_DzPRn4ixYibkM03x-QIA
    - Textures: https://www.pinterest.com/pin/276689970841144836/, https://stablediffusionweb.com/prompts/door-texture, https://www.cgtrader.com/3d-models/electronics/computer/scifi-keypad-and-key, https://www.artstation.com/artwork/WKgeav
 ### Demo
-  - [![Watch the video](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/thumbnail.jpg)](https://raw.githubusercontent.com/sunsh1ne4ever/crick-crack-the-krakens-back/Game_Demo.mp4)
+  - [![Watch the video](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/thumbnail.jpg)](https://raw.githubusercontent.com/sunsh1ne4ever/crick-crack-the-krakens-back/blob/main/Game_Demo.mp4)
 ### Download
   - The dist.zip file was too heavy for github so I have provided a link below
   - https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/elevits2_jh_edu/EY1updMqj55GqdMBm-t-VLEBwohjjCeyAXmnmiM9SzZEdw?e=0aCf45
